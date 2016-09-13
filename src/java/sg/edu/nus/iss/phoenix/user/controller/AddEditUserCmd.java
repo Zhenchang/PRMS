@@ -8,26 +8,23 @@ package sg.edu.nus.iss.phoenix.user.controller;
 import at.nocturne.api.Action;
 import at.nocturne.api.Perform;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sg.edu.nus.iss.phoenix.authenticate.entity.User;
-import sg.edu.nus.iss.phoenix.user.delegate.ReviewSelectUserDelegate;
+import sg.edu.nus.iss.phoenix.user.delegate.ReviewSelectRoleDelegate;
 
 /**
  *
  * @author Liu Zhenchang
  */
-@Action("manageuser")
-public class ManageUserCmd implements Perform {
+@Action("addedituser")
+public class AddEditUserCmd implements Perform {
 
     @Override
     public String perform(String string, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        ReviewSelectUserDelegate delg = new ReviewSelectUserDelegate();
-        List<User> users = delg.reviewSelectUser();
-        req.setAttribute("users", users);
-        return "/pages/cruduser.jsp";
+        ReviewSelectRoleDelegate dlg = new ReviewSelectRoleDelegate();
+        req.setAttribute("all_roles", dlg.reviewSelectRole());
+        return "/pages/setupuser.jsp";
     }
 
 }

@@ -120,10 +120,15 @@ public class UserDaoImpl implements UserDao {
                     + "role) VALUES (?, ?, ?, ?) ";
             stmt = this.connection.prepareStatement(sql);
 
+            String str_roles = "";
+            for (Role role : valueObject.getRoles()) {
+                str_roles += role.getRole() + ":";
+            }
+            str_roles = str_roles.substring(0, str_roles.length() - 1);
             stmt.setString(1, valueObject.getId());
             stmt.setString(2, valueObject.getPassword());
             stmt.setString(3, valueObject.getName());
-            stmt.setString(4, valueObject.getRoles().get(0).getRole());
+            stmt.setString(4, str_roles);
 
             int rowcount = databaseUpdate(stmt);
             if (rowcount != 1) {
@@ -154,9 +159,15 @@ public class UserDaoImpl implements UserDao {
 
         try {
             stmt = this.connection.prepareStatement(sql);
+
+            String str_roles = "";
+            for (Role role : valueObject.getRoles()) {
+                str_roles += role.getRole() + ":";
+            }
+
             stmt.setString(1, valueObject.getPassword());
             stmt.setString(2, valueObject.getName());
-            stmt.setString(3, valueObject.getRoles().get(0).getRole());
+            stmt.setString(3, str_roles);
 
             stmt.setString(4, valueObject.getId());
 
@@ -460,10 +471,10 @@ public class UserDaoImpl implements UserDao {
         }
         return conn;
     }
-    
+
     /**
      * @throws SQLException
-     * @see 
+     * @see
      * sg.​edu.​nus.​iss.​phoenix.​authenticate.​dao.​UserDao#loadByRole(sg.​edu.​nus.​iss.​phoenix.​authenticate.​entity.Role)
      */
     @Override
@@ -471,13 +482,13 @@ public class UserDaoImpl implements UserDao {
         List<User> users = new ArrayList<>();
         String sql = "select * FROM user WHERE (role = ? ) ";
         PreparedStatement stmt = null;
-        
+
         try {
             stmt = this.connection.prepareStatement(sql);
             stmt.setString(1, role.getRole());
             ResultSet rs = stmt.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 User user = new User();
                 user.setId(rs.getString("id"));
                 user.setName(rs.getString("name"));
