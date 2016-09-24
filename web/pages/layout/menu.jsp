@@ -19,11 +19,11 @@
         <!--  search is not implemented , remove it from menu selection
         * <tr>
                 <td>
-                                <a href="<c:url value="/nocturne/searchrp"/>"> <fmt:message
-            key="caption.menu.searchrp" />
-</a>
-</td>
-</tr> -->
+            <a href="<c:url value="/nocturne/searchrp"/>"> <fmt:message
+                key="caption.menu.searchrp" />
+        </a>
+        </td>
+        </tr> -->
         <tr>
             <td>
                 <a href="<c:url value="/nocturne/managerp"/>"> <fmt:message
@@ -31,6 +31,13 @@
                 </a>
             </td>
         </tr>
+        <tr>
+            <td>
+                <a href="<c:url value="/nocturne/manageschedule"/>"> <fmt:message
+                    key="caption.menu.manageschedule" />
+                </a>
+            </td>
+	</tr>
     </c:if>
     
     <c:if test="${sessionScope.user.roles[0].role=='admin'}">
@@ -41,7 +48,11 @@
                 </a>
             </td>
         </tr>
+        
     </c:if>
+
+    
+
     <tr>
         <td><a href="<c:url value="/nocturne/logout"/>"> <fmt:message
                     key="caption.menu.logout" />

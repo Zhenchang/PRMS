@@ -24,10 +24,16 @@
     <definition name="cruduserPage" extends="homePage">
         <put-attribute name="body" value="/pages/tilepages/cruduser.jsp" />
     </definition>
+    <definition name="crudschedulePage" extends="homePage">
+        <put-attribute name="body" value="/pages/tilepages/crudschedule.jsp" />
+    </definition>
     <definition name="setuprpPage" extends="homePage">
         <put-attribute name="body" value="/pages/tilepages/setuprp.jsp" />
     </definition>
     <definition name="setupuserPage" extends="homePage">
         <put-attribute name="body" value="/pages/tilepages/setupuser.jsp" />
+    </definition>
+    <definition name="setupschedulePage" extends="homePage">
+        <put-attribute name="body" value="/pages/tilepages/setupschedule.jsp" />
     </definition>
 </tiles-definitions>
