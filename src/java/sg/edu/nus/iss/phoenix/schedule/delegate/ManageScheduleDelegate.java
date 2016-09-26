@@ -31,6 +31,10 @@ public class ManageScheduleDelegate {
         return this.manageScheduleService.getAllProgramSlots();
     }
     
+    public List<ProgramSlot> getAllProgramSlots(Timestamp week) throws SQLException, NotFoundException{
+        return this.manageScheduleService.getAllProgramSlots(week);
+    }
+    
     public void processCreate(ProgramSlot programSlot) throws SQLException{
         this.manageScheduleService.processCreate(programSlot);
     }

@@ -33,6 +33,10 @@ public class ManageScheduleService {
         return this.scheduleDAO.loadAll();
     }
     
+    public List<ProgramSlot> getAllProgramSlots(Timestamp week) throws SQLException, NotFoundException{
+        return this.scheduleDAO.load(week);
+    }
+    
     public void processCreate(ProgramSlot programSlot) throws SQLException{
         this.scheduleDAO.create(programSlot);
     }

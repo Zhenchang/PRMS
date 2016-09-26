@@ -30,7 +30,7 @@
                 <th><fmt:message key="label.crudschedule.programName"/></th>
                 <th><fmt:message key="label.crudschedule.presenter"/></th>
                 <th><fmt:message key="label.crudschedule.producer"/></th>
-                <th><fmt:message key="label.crudschedule.edit"/> <fmt:message key="label.crudschedule.delete"/></th>
+                <th><fmt:message key="label.crudschedule.edit"/> <fmt:message key="label.crudschedule.delete"/><fmt:message key="label.crudschedule.copy"/></th>
             </tr>
             <c:forEach var="crudschedule" items="${programsolts}" varStatus="status">
                 <tr class="${status.index%2==0?'even':'odd'}">
@@ -57,6 +57,16 @@
                             <c:param name="dateOfProgram" value="${crudschedule.dateOfProgram}"/>
                         </c:url>
                         <a href="${delurl}"><fmt:message key="label.crudschedule.delete"/></a>
+                        <c:url var="copyurl" scope="page" value="/nocturne/addeditscheudle">
+                            <c:param name="duration" value="${crudschedule.duration}"/>
+                            <c:param name="dateOfProgram" value="${crudschedule.dateOfProgram}"/>
+                            <c:param name="startTime" value="${crudschedule.startTime}"/>
+                            <c:param name="programName" value="${crudschedule.programName}"/>
+                            <c:param name="presenter" value="${crudschedule.presenter.id}"/>
+                            <c:param name="producer" value="${crudschedule.producer.id}"/>
+                            <c:param name="insert" value="true"/>
+                        </c:url>
+                        <a href="${copyurl}"><fmt:message key="label.crudschedule.copy" /></a>
                     </td>
                 </tr>
             </c:forEach>

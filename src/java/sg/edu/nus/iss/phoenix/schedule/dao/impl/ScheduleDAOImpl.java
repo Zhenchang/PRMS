@@ -68,6 +68,23 @@ public class ScheduleDAOImpl implements ScheduleDAO{
             }
         }   
     }
+    
+    public List<ProgramSlot> load(Timestamp week) throws NotFoundException, SQLException {
+        String sql = "SELECT * FROM `program-slot` WHERE `startDate` = ?  ";
+        PreparedStatement stmt = null;
+        List<ProgramSlot> searchResults;
+        try {
+            stmt = this.connection.prepareStatement(sql);
+            stmt.setTimestamp(1, week);
+            searchResults = listQuery(stmt);
+        } finally {
+            if (stmt != null){
+                stmt.close();
+            }
+        }   
+        return searchResults;
+    }
+    
 
     @Override
     public List<ProgramSlot> loadAll() throws SQLException, NotFoundException {
@@ -238,6 +255,42 @@ public class ScheduleDAOImpl implements ScheduleDAO{
                 stmt.close();
             }
         }
+    }
+    
+    public List<Integer> getAllAnnual() throws NotFoundException, SQLException {
+        String sql = "select year from `annual-schedule` ";
+        List<Integer> annuals = new ArrayList<Integer>();
+        PreparedStatement stmt = null;
+        try {
+            stmt = this.connection.prepareStatement(sql);
+            ResultSet result= stmt.executeQuery();
+            while (result.next()) {
+                annuals.add(result.getInt("year"));
+            }
+        } finally {
+            if (stmt != null)
+                stmt.close();
+        }
+        return annuals;
+    }
+    
+    public List<Timestamp> getAllWeek(int year) throws NotFoundException, SQLException {
+        String sql = "select startDate from `weekly-schedule` where year = ?";
+        List<Timestamp> weeks = new ArrayList<Timestamp>();
+        PreparedStatement stmt = null;
+        try {
+            stmt = this.connection.prepareStatement(sql);
+            stmt.setInt(1, year);
+            ResultSet result= stmt.executeQuery();
+            while (result.next()) {
+                weeks.add(result.getTimestamp("startDate"));
+            }
+
+        } finally {
+            if (stmt != null)
+                stmt.close();
+        }
+        return weeks;
     }
     
     private List<ProgramSlot> listQuery(PreparedStatement stmt) throws SQLException, NotFoundException{

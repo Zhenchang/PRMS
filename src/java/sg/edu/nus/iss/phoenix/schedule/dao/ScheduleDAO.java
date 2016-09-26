@@ -165,4 +165,6 @@ public interface ScheduleDAO {
 	 */
 	public abstract ProgramSlot searchMatching(Time duration, Timestamp dateOfProgram)
 			throws SQLException;
+        
+        public List<ProgramSlot> load(Timestamp week) throws NotFoundException, SQLException;
 }
