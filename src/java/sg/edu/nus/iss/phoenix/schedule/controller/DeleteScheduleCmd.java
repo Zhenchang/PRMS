@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
 import sg.edu.nus.iss.phoenix.radioprogram.delegate.ProgramDelegate;
 import sg.edu.nus.iss.phoenix.schedule.delegate.ManageScheduleDelegate;
+import sg.edu.nus.iss.phoenix.schedule.delegate.ReviewSelectScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
 /**
@@ -39,9 +40,15 @@ public class DeleteScheduleCmd implements Perform{
             String duration = hsr.getParameter("duration");
             String dateOfProgram = hsr.getParameter("dateOfProgram");
             List<ProgramSlot> programSlot = manageScheduleDelegate.getAllProgramSlots();
+            /*
             manageScheduleDelegate.processDelete(Time.valueOf(duration.trim()), Timestamp.valueOf(dateOfProgram));
             hsr.setAttribute("programslots", programSlot);
             return "/pages/crudschedule.jsp";
+            */
+            ReviewSelectScheduleDelegate reviewSelectSchedule = new ReviewSelectScheduleDelegate();
+            List<Integer> annuals = reviewSelectSchedule.getAllAnnual();
+            hsr.setAttribute("annuals", annuals);
+            return "/pages/selectannual.jsp";
         } catch (NotFoundException ex) {
             Logger.getLogger(DeleteScheduleCmd.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

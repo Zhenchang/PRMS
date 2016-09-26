@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,8 +99,9 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         String sql = "";
         PreparedStatement stmt = null;
         try {
-            sql = "INSERT INTO `program-slot` (`duration`, `dateOfProgram`, `startTime`, `program-name`, `presenter`, `producer`)"
-                    + " VALUES (?, ?, ?, ?, ?, ?) ";
+            this.checkFather(valueObject);
+            sql = "INSERT INTO `program-slot` (`duration`, `dateOfProgram`, `startTime`, `program-name`, `presenter`, `producer`, `startDate`)"
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?) ";
             stmt = this.connection.prepareStatement(sql);
 
             stmt.setTime(1, valueObject.getDuration());
@@ -108,6 +110,45 @@ public class ScheduleDAOImpl implements ScheduleDAO{
             stmt.setString(4, valueObject.getProgramName());
             stmt.setObject(5, valueObject.getPresenter().getId());
             stmt.setObject(6, valueObject.getProducer().getId());
+            stmt.setTimestamp(7, this.checkWeek(valueObject.getStartTime()));
+
+            int rowcount = databaseUpdate(stmt);
+            if (rowcount != 1) {
+                // System.out.println("PrimaryKey Error when updating DB!");
+                throw new SQLException("PrimaryKey Error when updating DB!");
+            }
+        } catch (NotFoundException ex) {
+            Logger.getLogger(ScheduleDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+                if (stmt != null)
+                        stmt.close();
+        }
+    }
+    
+    /*
+    check week and year if exists
+    */
+    private void checkFather(ProgramSlot programSlot) throws SQLException, NotFoundException{
+        if(this.checkYear(programSlot.getStartTime()) == -1){
+            this.createYear(this.getYear(programSlot.getStartTime()), programSlot.getProducer().getId());
+        }
+        if(this.checkWeek(programSlot.getStartTime()) == null){
+            this.createWeek(this.getYear(programSlot.getStartTime()), programSlot.getProducer().getId(), programSlot.getStartTime());
+        }
+    }
+    /*
+    create year in the annual-schedule table
+    */
+    private void createYear(int year, String assignedBy) throws SQLException{
+        String sql = "";
+        PreparedStatement stmt = null;
+        
+        try {
+            sql = "insert into `annual-schedule`(year, assingedBy) values(?, ?); ";
+            stmt = this.connection.prepareStatement(sql);
+
+            stmt.setInt(1, year);
+            stmt.setString(2, assignedBy);
 
             int rowcount = databaseUpdate(stmt);
             if (rowcount != 1) {
@@ -115,10 +156,95 @@ public class ScheduleDAOImpl implements ScheduleDAO{
                 throw new SQLException("PrimaryKey Error when updating DB!");
             }
         } finally {
-                if (stmt != null)
-                        stmt.close();
+            if (stmt != null)
+                    stmt.close();
         }
     }
+    /*
+    create week in the week-schedule table
+    */
+    private void createWeek(int year, String assignedBy, Timestamp startDate) throws SQLException{
+        String sql = "";
+        PreparedStatement stmt = null;
+        
+        try {
+            sql = "insert into `weekly-schedule`(startDate, assignedBy, year) values(?, ?, ?); ";
+            stmt = this.connection.prepareStatement(sql);
+
+            stmt.setTimestamp(1, startDate);
+            stmt.setString(2, assignedBy);
+            stmt.setInt(3, year);
+
+            int rowcount = databaseUpdate(stmt);
+            if (rowcount != 1) {
+                // System.out.println("PrimaryKey Error when updating DB!");
+                throw new SQLException("PrimaryKey Error when updating DB!");
+            }
+        } finally {
+            if (stmt != null)
+                    stmt.close();
+        }
+    }
+    /*
+    check if the annual is already exits in the table,
+    if exists return the number of the year,
+    else return -1
+    */
+    private int checkYear(Timestamp startTime) throws SQLException, NotFoundException{
+        List<Integer> annuals = this.getAllAnnual();
+        
+        int year = this.getYear(startTime);
+        
+        for(int i = 0;i < annuals.size();i++){
+            if(year == annuals.get(i)){
+                return year;
+            }
+        }
+
+        return -1;
+    }
+    
+    /*
+    check if the week is already exits in the table,
+    if exists return the timestemp of the week startDate in the table,
+    else return -1
+    */
+    private Timestamp checkWeek(Timestamp startTime) throws SQLException, NotFoundException{
+        List<Timestamp> weekstamps = this.getAllWeek(this.getYear(startTime));
+        List<Integer> weeks = new ArrayList<Integer>();
+        for(int i = 0; i < weekstamps.size();i++){
+            weeks.add(this.getWeek(weekstamps.get(i)));
+        }
+        
+        int week = this.getWeek(startTime);
+        
+        for(int i = 0;i < weeks.size();i++){
+            if(week == weeks.get(i)){
+                return weekstamps.get(i);
+            }
+        }
+
+        return null;
+    }
+    /*
+    return the year by given the timestamp
+    */
+    private int getYear(Timestamp startTime){
+        long timestamp = startTime.getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(timestamp);
+        return cal.get(Calendar.YEAR);
+    }
+    /*
+    return the week of the year by given the timestamp
+    */
+    private int getWeek(Timestamp startTime){
+        long timestamp = startTime.getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(timestamp);
+        return cal.get(Calendar.WEEK_OF_YEAR);
+    }
+
 
     @Override
     public void save(ProgramSlot valueObject, Time duration, Timestamp dateOfProgram) throws NotFoundException, SQLException {

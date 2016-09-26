@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
 import sg.edu.nus.iss.phoenix.schedule.delegate.ManageScheduleDelegate;
+import sg.edu.nus.iss.phoenix.schedule.delegate.ReviewSelectScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.user.delegate.ManageUserDelegate;
 
@@ -47,10 +48,15 @@ public class EnterScheduleDetailsCmd implements Perform{
             } else{
                 manageScheduleDelegate.processModify(programSlot, programSlot.getDuration(), programSlot.getDateOfProgram());
             }
-            
+            /*
             List<ProgramSlot> programSolts = manageScheduleDelegate.getAllProgramSlots();
             hsr.setAttribute("programsolts", programSolts);
-            return "/pages/crudschedule.jsp";
+
+            return "/pages/crudschedule.jsp";*/
+            ReviewSelectScheduleDelegate reviewSelectSchedule = new ReviewSelectScheduleDelegate();
+            List<Integer> annuals = reviewSelectSchedule.getAllAnnual();
+            hsr.setAttribute("annuals", annuals);
+            return "/pages/selectannual.jsp";
         } catch (NotFoundException ex) {
             Logger.getLogger(EnterScheduleDetailsCmd.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
