@@ -29,11 +29,21 @@ public class ManageUserService {
         this.userDao = new UserDaoImpl();
     }
     
+    /**
+     * get user by given the id
+     * @return
+     * @throws SQLException 
+     */
     public User getUserById(String id) throws NotFoundException, SQLException{
         User user = this.userDao.getObject(id);
         return user;
     }
     
+    /**
+     * get all presenter
+     * @return
+     * @throws SQLException 
+     */
     public List<User> getAllPresenter() throws SQLException{
         List<User> users;
         User presenter = new User();
@@ -44,6 +54,11 @@ public class ManageUserService {
         return users;
     }
     
+    /**
+     * get all producers
+     * @return
+     * @throws SQLException 
+     */
     public List<User> getAllProducer() throws SQLException{
         List<User> users;
         User presenter = new User();

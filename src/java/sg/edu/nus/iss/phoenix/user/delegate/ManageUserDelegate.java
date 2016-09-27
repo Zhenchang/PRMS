@@ -25,14 +25,31 @@ public class ManageUserDelegate {
         this.manageUserService = new ManageUserService();
     }
     
+    /**
+     * get user by given id of the user
+     * @param id
+     * @return
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     public User getUserById(String id) throws NotFoundException, SQLException{
         return this.manageUserService.getUserById(id);
     }
     
+    /**
+     * get all presenters
+     * @return
+     * @throws SQLException 
+     */
     public List<User> getAllPresenter() throws SQLException{
         return this.manageUserService.getAllPresenter();
     }
     
+    /**
+     * get all producers
+     * @return
+     * @throws SQLException 
+     */
     public List<User> getAllProducer() throws SQLException{
         return this.manageUserService.getAllProducer();
     }

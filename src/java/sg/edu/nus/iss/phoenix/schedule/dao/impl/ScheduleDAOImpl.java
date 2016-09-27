@@ -39,12 +39,23 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         this.connection = this.openConnection();
         this.userDao = new UserDaoImpl();
     }
-
+    /**
+     * create an empty program slot
+     * @return program slot object
+     */
     @Override
     public ProgramSlot createValueObject() {
         return new ProgramSlot();
     }
 
+    /**
+     * get the program slot
+     * @param duration
+     * @param dateOfProgram
+     * @return
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     @Override
     public ProgramSlot getObject(Time duration, Timestamp dateOfProgram) throws NotFoundException, SQLException {
         ProgramSlot valueObject = this.createValueObject();
@@ -54,6 +65,12 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         return valueObject;
     }
 
+    /**
+     * 
+     * @param valueObject
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     @Override
     public void load(ProgramSlot valueObject) throws NotFoundException, SQLException {
         String sql = "SELECT * FROM `program-slot` WHERE (`duration` = ? AND `dateOfProgram` = ?) ";
@@ -70,6 +87,13 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         }   
     }
     
+    /**
+     * load whole week's program slot
+     * @param week
+     * @return
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     public List<ProgramSlot> load(Timestamp week) throws NotFoundException, SQLException {
         String sql = "SELECT * FROM `program-slot` WHERE `startDate` = ?  ";
         PreparedStatement stmt = null;
@@ -87,6 +111,12 @@ public class ScheduleDAOImpl implements ScheduleDAO{
     }
     
 
+    /**
+     * load all the program slot in database
+     * @return
+     * @throws SQLException
+     * @throws NotFoundException 
+     */
     @Override
     public List<ProgramSlot> loadAll() throws SQLException, NotFoundException {
         String sql = "SELECT * FROM `program-slot` ORDER BY dateOfProgram";
@@ -94,6 +124,11 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         return searchResults;
     }
 
+    /**
+     * create new record in table
+     * @param valueObject
+     * @throws SQLException 
+     */
     @Override
     public void create(ProgramSlot valueObject) throws SQLException {
         String sql = "";
@@ -125,9 +160,12 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         }
     }
     
-    /*
-    check week and year if exists
-    */
+    /**
+     * check week and year if exists
+     * @param programSlot
+     * @throws SQLException
+     * @throws NotFoundException 
+     */
     private void checkFather(ProgramSlot programSlot) throws SQLException, NotFoundException{
         if(this.checkYear(programSlot.getStartTime()) == -1){
             this.createYear(this.getYear(programSlot.getStartTime()), programSlot.getProducer().getId());
@@ -136,9 +174,13 @@ public class ScheduleDAOImpl implements ScheduleDAO{
             this.createWeek(this.getYear(programSlot.getStartTime()), programSlot.getProducer().getId(), programSlot.getStartTime());
         }
     }
-    /*
-    create year in the annual-schedule table
-    */
+
+    /**
+     * create year in the annual-schedule table
+     * @param year
+     * @param assignedBy
+     * @throws SQLException 
+     */
     private void createYear(int year, String assignedBy) throws SQLException{
         String sql = "";
         PreparedStatement stmt = null;
@@ -160,9 +202,14 @@ public class ScheduleDAOImpl implements ScheduleDAO{
                     stmt.close();
         }
     }
-    /*
-    create week in the week-schedule table
-    */
+
+    /**
+     * create week in the week-schedule table
+     * @param year
+     * @param assignedBy
+     * @param startDate
+     * @throws SQLException 
+     */
     private void createWeek(int year, String assignedBy, Timestamp startDate) throws SQLException{
         String sql = "";
         PreparedStatement stmt = null;
@@ -185,11 +232,16 @@ public class ScheduleDAOImpl implements ScheduleDAO{
                     stmt.close();
         }
     }
-    /*
-    check if the annual is already exits in the table,
-    if exists return the number of the year,
-    else return -1
-    */
+
+    /**
+     * check if the annual is already exits in the table,
+     * if exists return the number of the year,
+     * else return -1
+     * @param startTime
+     * @return
+     * @throws SQLException
+     * @throws NotFoundException 
+     */
     private int checkYear(Timestamp startTime) throws SQLException, NotFoundException{
         List<Integer> annuals = this.getAllAnnual();
         
@@ -203,12 +255,16 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 
         return -1;
     }
-    
-    /*
-    check if the week is already exits in the table,
-    if exists return the timestemp of the week startDate in the table,
-    else return -1
-    */
+
+    /**
+     *     check if the week is already exits in the table,
+     * if exists return the timestamp of the week startDate in the table,
+     * else return -1
+     * @param startTime
+     * @return
+     * @throws SQLException
+     * @throws NotFoundException 
+     */
     private Timestamp checkWeek(Timestamp startTime) throws SQLException, NotFoundException{
         List<Timestamp> weekstamps = this.getAllWeek(this.getYear(startTime));
         List<Integer> weeks = new ArrayList<Integer>();
@@ -226,18 +282,24 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 
         return null;
     }
-    /*
-    return the year by given the timestamp
-    */
+
+    /**
+     * return the year by given the timestamp
+     * @param startTime
+     * @return 
+     */
     private int getYear(Timestamp startTime){
         long timestamp = startTime.getTime();
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(timestamp);
         return cal.get(Calendar.YEAR);
     }
-    /*
-    return the week of the year by given the timestamp
-    */
+
+    /**
+     * return the week of the year by given the timestamp
+     * @param startTime
+     * @return 
+     */
     private int getWeek(Timestamp startTime){
         long timestamp = startTime.getTime();
         Calendar cal = Calendar.getInstance();
@@ -245,7 +307,14 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         return cal.get(Calendar.WEEK_OF_YEAR);
     }
 
-
+    /**
+     * 
+     * @param valueObject
+     * @param duration
+     * @param dateOfProgram
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     @Override
     public void save(ProgramSlot valueObject, Time duration, Timestamp dateOfProgram) throws NotFoundException, SQLException {
 
@@ -279,6 +348,12 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         }
     }
 
+    /**
+     * delete the record in database
+     * @param valueObject
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     @Override
     public void delete(ProgramSlot valueObject) throws NotFoundException, SQLException {
         String sql = "DELETE FROM `program-slot` WHERE (`duration` = ? AND `dateOfProgram` = ? ) ";
@@ -302,6 +377,10 @@ public class ScheduleDAOImpl implements ScheduleDAO{
             }
     }
 
+    /**
+     * clear the program slot table
+     * @throws SQLException 
+     */
     @Override
     public void deleteAll() throws SQLException {
         String sql = "DELETE FROM `program-slot`";
@@ -318,6 +397,11 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         }
     }
 
+    /**
+     * get the record number in program slot table
+     * @return
+     * @throws SQLException 
+     */
     @Override
     public int countAll() throws SQLException {
         String sql = "SELECT count(*) FROM `program-slot`";
@@ -343,6 +427,13 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         return allRows;
     }
 
+    /**
+     * search program slot
+     * @param duration
+     * @param dateOfProgram
+     * @return ProgramSlot object or null if not found
+     * @throws SQLException 
+     */
     @Override
     public ProgramSlot searchMatching(Time duration, Timestamp dateOfProgram) throws SQLException {
         try {
@@ -353,12 +444,25 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         return (null);
     }
     
+    /**
+     * update the database
+     * @param stmt
+     * @return result set
+     * @throws SQLException 
+     */
     private int databaseUpdate(PreparedStatement stmt) throws SQLException {
         
         int result = stmt.executeUpdate();
         return result;
     }
     
+    /**
+     * query the table
+     * @param stmt
+     * @param valueObject
+     * @throws SQLException
+     * @throws NotFoundException 
+     */
     private void singleQuery(PreparedStatement stmt, ProgramSlot valueObject) throws SQLException, NotFoundException{
 
         try (ResultSet result = stmt.executeQuery()) {
@@ -383,6 +487,12 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         }
     }
     
+    /**
+     * get all annual in db
+     * @return
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     public List<Integer> getAllAnnual() throws NotFoundException, SQLException {
         String sql = "select year from `annual-schedule` ";
         List<Integer> annuals = new ArrayList<Integer>();
@@ -400,6 +510,13 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         return annuals;
     }
     
+    /**
+     * get all week in a year in the db
+     * @param year
+     * @return
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     public List<Timestamp> getAllWeek(int year) throws NotFoundException, SQLException {
         String sql = "select startDate from `weekly-schedule` where year = ?";
         List<Timestamp> weeks = new ArrayList<Timestamp>();
@@ -419,6 +536,13 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         return weeks;
     }
     
+    /**
+     * query multiple record from the table
+     * @param stmt
+     * @return
+     * @throws SQLException
+     * @throws NotFoundException 
+     */
     private List<ProgramSlot> listQuery(PreparedStatement stmt) throws SQLException, NotFoundException{
         ArrayList<ProgramSlot> searchResults = new ArrayList<>();
         try (ResultSet result = stmt.executeQuery()) {
@@ -443,7 +567,10 @@ public class ScheduleDAOImpl implements ScheduleDAO{
         return searchResults;
     }
     
-    
+    /**
+     * open db connection
+     * @return 
+     */
     private Connection openConnection() {
         Connection conn = null;
         try {

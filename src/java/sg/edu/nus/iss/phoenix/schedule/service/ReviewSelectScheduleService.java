@@ -27,10 +27,23 @@ public class ReviewSelectScheduleService {
         this.scheduleDAO = new ScheduleDAOImpl();
     }
     
+    /**
+     * return all the weeks in the database in a specific year(Integer)
+     * @param year
+     * @return
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     public List<Timestamp> getAllWeek(int year) throws NotFoundException, SQLException{
         return this.scheduleDAO.getAllWeek(year);
     }
     
+    /**
+     * return all the year
+     * @return
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     public List<Integer> getAllAnnual() throws NotFoundException, SQLException{
         return this.scheduleDAO.getAllAnnual();
     }
