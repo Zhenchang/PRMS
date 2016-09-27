@@ -29,18 +29,44 @@ public class ManageScheduleService {
         this.scheduleDAO = new ScheduleDAOImpl();
     }
     
+    /**
+     * getAllProgramSlots. This method will return all the program slots.
+     * @return List of Program Slots
+     * @throws SQLException
+     * @throws NotFoundException 
+     */
     public List<ProgramSlot> getAllProgramSlots() throws SQLException, NotFoundException{
         return this.scheduleDAO.loadAll();
     }
     
+    /**
+     * processCreate. This method will start the process of creating a new program slot.
+     * @param programSlot
+     * @throws SQLException 
+     */
     public void processCreate(ProgramSlot programSlot) throws SQLException{
         this.scheduleDAO.create(programSlot);
     }
     
+    /**
+     * processModify . This method will start the process of modifying an existing program slot.
+     * @param programSlot
+     * @param duration
+     * @param dateOfProgram
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     public void processModify(ProgramSlot programSlot, Time duration, Timestamp dateOfProgram) throws NotFoundException, SQLException{
         this.scheduleDAO.save(programSlot, duration, dateOfProgram);
     }
     
+    /**
+     * processDelete . This method will start the process of deleting an existing program slot.
+     * @param duration
+     * @param dateOfProgram
+     * @throws NotFoundException
+     * @throws SQLException 
+     */
     public void processDelete(Time duration, Timestamp dateOfProgram) throws NotFoundException, SQLException{
         ProgramSlot programSlot = new  ProgramSlot(duration, dateOfProgram);
         this.scheduleDAO.delete(programSlot);

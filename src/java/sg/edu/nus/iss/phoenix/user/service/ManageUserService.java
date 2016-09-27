@@ -24,6 +24,9 @@ public class ManageUserService {
     private DAOFactoryImpl daoFactroy;
     private UserDao userDao;
     
+    /**
+     * Constructor. It takes no arguments and provides the most simple way to create an object instance.
+     */
     public ManageUserService(){
         this.daoFactroy = new DAOFactoryImpl();
         this.userDao = new UserDaoImpl();
@@ -34,6 +37,11 @@ public class ManageUserService {
         return user;
     }
     
+    /**
+     * getAllPresenter. This method returns all the presenters.
+     * @return
+     * @throws SQLException 
+     */
     public List<User> getAllPresenter() throws SQLException{
         List<User> users;
         User presenter = new User();
@@ -44,6 +52,11 @@ public class ManageUserService {
         return users;
     }
     
+    /**
+     * getAllProducer. This method will return all the producers.
+     * @return
+     * @throws SQLException 
+     */
     public List<User> getAllProducer() throws SQLException{
         List<User> users;
         User presenter = new User();

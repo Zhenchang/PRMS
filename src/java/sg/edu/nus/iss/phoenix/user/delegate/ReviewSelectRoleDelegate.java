@@ -22,8 +22,7 @@ public class ReviewSelectRoleDelegate {
     }
     
     /**
-     * Retrieve all roles.
-     * 
+     * reviewSelectRole. This method will retrieve all roles.
      * @return List of roles.
      */
     public List<Role> reviewSelectRole() {
