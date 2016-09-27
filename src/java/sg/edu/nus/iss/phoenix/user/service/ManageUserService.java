@@ -32,6 +32,11 @@ public class ManageUserService {
         this.userDao = new UserDaoImpl();
     }
     
+    /**
+     * get user by given the id
+     * @return
+     * @throws SQLException 
+     */
     public User getUserById(String id) throws NotFoundException, SQLException{
         User user = this.userDao.getObject(id);
         return user;

@@ -33,7 +33,7 @@
         </tr>
         <tr>
             <td>
-                <a href="<c:url value="/nocturne/manageschedule"/>"> <fmt:message
+                <a href="<c:url value="/nocturne/selectannual"/>"> <fmt:message
                     key="caption.menu.manageschedule" />
                 </a>
             </td>

@@ -18,23 +18,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
 import sg.edu.nus.iss.phoenix.schedule.delegate.ManageScheduleDelegate;
+import sg.edu.nus.iss.phoenix.schedule.delegate.ReviewSelectScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
 /**
  *
  * @author zz
  */
-@Action("manageschedule")
-public class ManageScheduleCmd implements Perform {
+@Action("selectannual")
+public class SelectAnnualCmd implements Perform{
 
     @Override
     public String perform(String string, HttpServletRequest hsr, HttpServletResponse hsr1) throws IOException, ServletException {
         try {
-            ManageScheduleDelegate manageScheduleDelegate = new ManageScheduleDelegate();
-            Timestamp week = Timestamp.valueOf(hsr.getParameter("week"));
-            List<ProgramSlot> programSolts = manageScheduleDelegate.getAllProgramSlots(week);
-            hsr.setAttribute("programsolts", programSolts);
-            return "/pages/crudschedule.jsp";
+            ReviewSelectScheduleDelegate reviewSelectSchedule = new ReviewSelectScheduleDelegate();
+            List<Integer> annuals = reviewSelectSchedule.getAllAnnual();
+            hsr.setAttribute("annuals", annuals);
+            return "/pages/selectannual.jsp";
         } catch (SQLException ex) {
             Logger.getLogger(ManageScheduleCmd.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotFoundException ex) {

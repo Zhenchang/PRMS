@@ -36,4 +36,11 @@
     <definition name="setupschedulePage" extends="homePage">
         <put-attribute name="body" value="/pages/tilepages/setupschedule.jsp" />
     </definition>
+    <definition name="selectannualPage" extends="homePage">
+        <put-attribute name="body" value="/pages/tilepages/selectannual.jsp" />
+    </definition>
+    <definition name="selectweekPage" extends="homePage">
+        <put-attribute name="body" value="/pages/tilepages/selectweek.jsp" />
+    </definition>
+
 </tiles-definitions>

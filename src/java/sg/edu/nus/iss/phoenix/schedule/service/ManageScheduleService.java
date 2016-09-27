@@ -40,7 +40,18 @@ public class ManageScheduleService {
     }
     
     /**
-     * processCreate. This method will start the process of creating a new program slot.
+     * return all program slots in a specific week
+     * @param week
+     * @return
+     * @throws SQLException
+     * @throws NotFoundException 
+     */
+    public List<ProgramSlot> getAllProgramSlots(Timestamp week) throws SQLException, NotFoundException{
+        return this.scheduleDAO.load(week);
+    }
+    
+    /**
+     * create a new program slot 
      * @param programSlot
      * @throws SQLException 
      */

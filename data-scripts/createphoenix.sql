@@ -105,6 +105,7 @@ CREATE  TABLE IF NOT EXISTS `phoenix`.`annual-schedule` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
 CREATE INDEX `id_annual_schedule` ON `phoenix`.`annual-schedule` (`assingedBy` ASC) ;
 
 -- -----------------------------------------------------
@@ -148,3 +149,28 @@ ENGINE = InnoDB;
 CREATE UNIQUE INDEX `startDate_UNIQUE` ON `phoenix`.`weekly-schedule` (`startDate` ASC) ;
 
 CREATE INDEX `id_assigned_by` ON `phoenix`.`weekly-schedule` (`assignedBy` ASC) ;
+
+
+-- Adding column
+ALTER TABLE `program-slot` ADD presenter VARCHAR(40);
+ALTER TABLE `program-slot` ADD producer VARCHAR(40);
+ALTER TABLE `program-slot` ADD startDate DATETIME;
+ALTER TABLE `weekly-schedule` ADD `year` INT;
+
+ALTER TABLE `program-slot` ADD CONSTRAINT `id_week` FOREIGN KEY (`startDate` ) REFERENCES `phoenix`.`weekly-schedule` (`startDate` ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `program-slot` ADD CONSTRAINT `id_producer` FOREIGN KEY (`producer` ) REFERENCES `phoenix`.`user` (`id` ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `program-slot` ADD CONSTRAINT `id_presenter` FOREIGN KEY (`presenter` ) REFERENCES `phoenix`.`user` (`id` ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `weekly-schedule` ADD CONSTRAINT `id_year` FOREIGN KEY (`year` ) REFERENCES `phoenix`.`annual-schedule` (`year` ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+insert into `phoenix`.`annual-schedule` values(2016, "dilbert");
+insert into `phoenix`.`annual-schedule` values(2017, "pointyhead");
+
+
+insert into `phoenix`.`weekly-schedule` values("2016-09-26 00:30:00", "dilbert", 2016);
+insert into `phoenix`.`weekly-schedule` values("2016-09-27 00:30:00", "dilbert", 2016);
+insert into `phoenix`.`weekly-schedule` values("2017-09-26 00:30:00", "dilbert", 2017);
+
+insert into `phoenix`.`program-slot` values('00:30:00', '2016-09-27 00:30:00', '2016-09-27 00:30:00', 'ppk', 'dilbert', 'dogbert', '2016-09-27 00:30:00');
+insert into `phoenix`.`program-slot` values('00:40:00', '2016-09-27 00:40:00', '2016-09-27 00:30:00', 'ppk', 'dilbert', 'dogbert', '2016-09-27 00:30:00');
+insert into `phoenix`.`program-slot` values('00:50:00', '2016-09-27 00:50:00', '2016-09-27 00:30:00', 'ppk', 'dilbert', 'dogbert', '2016-09-27 00:30:00');
