@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
 import sg.edu.nus.iss.phoenix.schedule.delegate.ManageScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.delegate.ReviewSelectScheduleDelegate;
+import sg.edu.nus.iss.phoenix.schedule.entity.AnnualSchedule;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.user.delegate.ManageUserDelegate;
 
@@ -54,7 +56,11 @@ public class EnterScheduleDetailsCmd implements Perform{
 
             return "/pages/crudschedule.jsp";*/
             ReviewSelectScheduleDelegate reviewSelectSchedule = new ReviewSelectScheduleDelegate();
-            List<Integer> annuals = reviewSelectSchedule.getAllAnnual();
+            List<AnnualSchedule> annualschedule = reviewSelectSchedule.getAllAnnual();
+            List<Integer> annuals = new ArrayList();
+            for(int i=0;i < annualschedule.size();i++){
+                annuals.add(annualschedule.get(i).getYear());
+            }
             hsr.setAttribute("annuals", annuals);
             return "/pages/selectannual.jsp";
         } catch (NotFoundException ex) {

@@ -22,7 +22,9 @@ import sg.edu.nus.iss.phoenix.authenticate.dao.impl.UserDaoImpl;
 import sg.edu.nus.iss.phoenix.core.dao.DBConstants;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
 import sg.edu.nus.iss.phoenix.schedule.dao.ScheduleDAO;
+import sg.edu.nus.iss.phoenix.schedule.entity.AnnualSchedule;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
+import sg.edu.nus.iss.phoenix.schedule.entity.WeeklySchedule;
 
 /**
  *
@@ -243,12 +245,12 @@ public class ScheduleDAOImpl implements ScheduleDAO{
      * @throws NotFoundException 
      */
     private int checkYear(Timestamp startTime) throws SQLException, NotFoundException{
-        List<Integer> annuals = this.getAllAnnual();
+        List<AnnualSchedule> annuals = this.getAllAnnual();
         
         int year = this.getYear(startTime);
         
         for(int i = 0;i < annuals.size();i++){
-            if(year == annuals.get(i)){
+            if(year == annuals.get(i).getYear()){
                 return year;
             }
         }
@@ -266,17 +268,17 @@ public class ScheduleDAOImpl implements ScheduleDAO{
      * @throws NotFoundException 
      */
     private Timestamp checkWeek(Timestamp startTime) throws SQLException, NotFoundException{
-        List<Timestamp> weekstamps = this.getAllWeek(this.getYear(startTime));
+        List<WeeklySchedule> weekstamps = this.getAllWeek(this.getYear(startTime));
         List<Integer> weeks = new ArrayList<Integer>();
         for(int i = 0; i < weekstamps.size();i++){
-            weeks.add(this.getWeek(weekstamps.get(i)));
+            weeks.add(this.getWeek(weekstamps.get(i).getStartDate()));
         }
         
         int week = this.getWeek(startTime);
         
         for(int i = 0;i < weeks.size();i++){
             if(week == weeks.get(i)){
-                return weekstamps.get(i);
+                return weekstamps.get(i).getStartDate();
             }
         }
 
@@ -493,15 +495,15 @@ public class ScheduleDAOImpl implements ScheduleDAO{
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<Integer> getAllAnnual() throws NotFoundException, SQLException {
+    public List<AnnualSchedule> getAllAnnual() throws NotFoundException, SQLException {
         String sql = "select year from `annual-schedule` ";
-        List<Integer> annuals = new ArrayList<Integer>();
+        List<AnnualSchedule> annuals = new ArrayList();
         PreparedStatement stmt = null;
         try {
             stmt = this.connection.prepareStatement(sql);
             ResultSet result= stmt.executeQuery();
             while (result.next()) {
-                annuals.add(result.getInt("year"));
+                annuals.add(new AnnualSchedule(result.getInt("year")));
             }
         } finally {
             if (stmt != null)
@@ -517,16 +519,16 @@ public class ScheduleDAOImpl implements ScheduleDAO{
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<Timestamp> getAllWeek(int year) throws NotFoundException, SQLException {
+    public List<WeeklySchedule> getAllWeek(int year) throws NotFoundException, SQLException {
         String sql = "select startDate from `weekly-schedule` where year = ?";
-        List<Timestamp> weeks = new ArrayList<Timestamp>();
+        List<WeeklySchedule> weeks = new ArrayList<WeeklySchedule>();
         PreparedStatement stmt = null;
         try {
             stmt = this.connection.prepareStatement(sql);
             stmt.setInt(1, year);
             ResultSet result= stmt.executeQuery();
             while (result.next()) {
-                weeks.add(result.getTimestamp("startDate"));
+                weeks.add(new WeeklySchedule(result.getTimestamp("startDate")));
             }
 
         } finally {

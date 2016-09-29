@@ -10,6 +10,7 @@ import at.nocturne.api.Perform;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
 import sg.edu.nus.iss.phoenix.schedule.delegate.ManageScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.delegate.ReviewSelectScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
+import sg.edu.nus.iss.phoenix.schedule.entity.WeeklySchedule;
 
 /**
  *
@@ -33,7 +35,11 @@ public class SelectWeekCmd implements Perform{
         try {
             ReviewSelectScheduleDelegate reviewSelectSchedule = new ReviewSelectScheduleDelegate();
             int year = Integer.parseInt(hsr.getParameter("year"));
-            List<Timestamp> weeks = reviewSelectSchedule.getAllWeek(year);
+            List<WeeklySchedule> weeksObj = reviewSelectSchedule.getAllWeek(year);
+            List<Timestamp> weeks = new ArrayList<Timestamp>();
+            for(int i = 0;i < weeksObj.size();i++){
+                weeks.add(weeksObj.get(i).getStartDate());
+            }
             hsr.setAttribute("weeks", weeks);
             return "/pages/selectweek.jsp";
         } catch (SQLException ex) {

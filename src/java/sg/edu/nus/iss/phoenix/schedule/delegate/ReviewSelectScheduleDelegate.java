@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
+import sg.edu.nus.iss.phoenix.schedule.entity.AnnualSchedule;
+import sg.edu.nus.iss.phoenix.schedule.entity.WeeklySchedule;
 import sg.edu.nus.iss.phoenix.schedule.service.ReviewSelectScheduleService;
 
 /**
@@ -30,7 +32,7 @@ public class ReviewSelectScheduleDelegate {
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<Timestamp> getAllWeek(int year) throws NotFoundException, SQLException{
+    public List<WeeklySchedule> getAllWeek(int year) throws NotFoundException, SQLException{
         return this.reviewSelectScheduleService.getAllWeek(year);
     }
     
@@ -40,7 +42,7 @@ public class ReviewSelectScheduleDelegate {
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<Integer> getAllAnnual() throws NotFoundException, SQLException{
+    public List<AnnualSchedule> getAllAnnual() throws NotFoundException, SQLException{
         return this.reviewSelectScheduleService.getAllAnnual();
     }
     

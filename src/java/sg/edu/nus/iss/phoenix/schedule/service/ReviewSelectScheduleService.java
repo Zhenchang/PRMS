@@ -13,6 +13,8 @@ import sg.edu.nus.iss.phoenix.core.dao.DAOFactoryImpl;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
 import sg.edu.nus.iss.phoenix.schedule.dao.ScheduleDAO;
 import sg.edu.nus.iss.phoenix.schedule.dao.impl.ScheduleDAOImpl;
+import sg.edu.nus.iss.phoenix.schedule.entity.AnnualSchedule;
+import sg.edu.nus.iss.phoenix.schedule.entity.WeeklySchedule;
 
 /**
  *
@@ -34,7 +36,7 @@ public class ReviewSelectScheduleService {
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<Timestamp> getAllWeek(int year) throws NotFoundException, SQLException{
+    public List<WeeklySchedule> getAllWeek(int year) throws NotFoundException, SQLException{
         return this.scheduleDAO.getAllWeek(year);
     }
     
@@ -44,7 +46,7 @@ public class ReviewSelectScheduleService {
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<Integer> getAllAnnual() throws NotFoundException, SQLException{
+    public List<AnnualSchedule> getAllAnnual() throws NotFoundException, SQLException{
         return this.scheduleDAO.getAllAnnual();
     }
 }

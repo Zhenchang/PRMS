@@ -21,7 +21,9 @@ import static org.junit.Assert.*;
 import sg.edu.nus.iss.phoenix.authenticate.entity.Role;
 import sg.edu.nus.iss.phoenix.authenticate.entity.User;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
+import sg.edu.nus.iss.phoenix.schedule.entity.AnnualSchedule;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
+import sg.edu.nus.iss.phoenix.schedule.entity.WeeklySchedule;
 import sg.edu.nus.iss.phoenix.schedule.service.ManageScheduleService;
 import sg.edu.nus.iss.phoenix.schedule.service.ReviewSelectScheduleService;
 
@@ -84,7 +86,7 @@ public class ReviewSelectScheduleTest {
     @Test
     public void testGetAllWeeks(){
         try {
-            List<Timestamp> list = this.reviewSelectScheduleService.getAllWeek(2016);
+            List<WeeklySchedule> list = this.reviewSelectScheduleService.getAllWeek(2016);
             Assert.assertTrue(list.size() != 0);
         } catch (SQLException ex) {
             Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,7 +103,7 @@ public class ReviewSelectScheduleTest {
         try {
             Timestamp timestamp;
             timestamp = Timestamp.valueOf("2016-9-27 00:30:00");
-            List<Integer> list = this.reviewSelectScheduleService.getAllAnnual();
+            List<AnnualSchedule> list = this.reviewSelectScheduleService.getAllAnnual();
             Assert.assertTrue(list.size() != 0);
         } catch (SQLException ex) {
             Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
