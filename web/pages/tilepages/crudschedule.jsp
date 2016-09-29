@@ -57,7 +57,7 @@
                             <c:param name="dateOfProgram" value="${crudschedule.dateOfProgram}"/>
                         </c:url>
                         <a href="${delurl}"><fmt:message key="label.crudschedule.delete"/></a>
-                        <c:url var="copyurl" scope="page" value="/nocturne/addeditscheudle">
+                        <c:url var="copyurl" scope="page" value="/nocturne/copyscheudle">
                             <c:param name="duration" value="${crudschedule.duration}"/>
                             <c:param name="dateOfProgram" value="${crudschedule.dateOfProgram}"/>
                             <c:param name="startTime" value="${crudschedule.startTime}"/>
