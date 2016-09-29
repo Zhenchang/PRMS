@@ -25,15 +25,17 @@ public class ReviewSelectUserService {
     DAOFactory factory;
     UserDao userDao;
     
+    /**
+     * Constructor. It takes no argument and provides the most simple way to create an object instance.
+     */
     public ReviewSelectUserService() {
         factory = new DAOFactoryImpl();
         userDao = factory.getUserDAO();
     }
     
     /**
-     * Retrieve all users from the system.
-     * 
-     * @return A list of user. 
+     * reviewSelectUser. This method will return a list of all users in the system.
+     * @return List of Users
      */
     public List<User> reviewSelectUser() {
         List<User> users = new ArrayList();
@@ -46,8 +48,9 @@ public class ReviewSelectUserService {
     }
     
     /**
-     * @param role Specific role of the user.
-     * @return A list of user with specific role.
+     * reviewSelectUserByRole. his method will return a list of all users in the system based on the role.
+     * @param role
+     * @return List of Users
      */
     public List<User> reviewSelectUserByRole(Role role) {
         List<User> users = new ArrayList();

@@ -23,6 +23,9 @@ public class RoleService {
     private DAOFactory factory = null;
     private RoleDao dao = null;
     
+    /**
+     * Constructor. It takes no argument and provides the most simple way to create an object instance.
+     */
     public RoleService() {
         factory = new DAOFactoryImpl();
         dao = factory.getRoleDAO();

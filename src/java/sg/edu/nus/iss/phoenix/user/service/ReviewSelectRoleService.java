@@ -29,9 +29,8 @@ public class ReviewSelectRoleService {
     }
     
     /**
-     * Select all roles from the system.
-     * 
-     * @return List of roles.
+     * reviewSelectRole. This method will return a list of Roles.
+     * @return List of Role
      */
     public List<Role> reviewSelectRole() {
         List<Role> roles = null;

@@ -28,10 +28,10 @@ public class ManageScheduleService {
         this.factory = new DAOFactoryImpl();
         this.scheduleDAO = new ScheduleDAOImpl();
     }
-
+    
     /**
-     * return all program slots
-     * @return
+     * getAllProgramSlots. This method will return all the program slots.
+     * @return List of Program Slots
      * @throws SQLException
      * @throws NotFoundException 
      */
@@ -60,7 +60,7 @@ public class ManageScheduleService {
     }
     
     /**
-     * modify the program slot 
+     * processModify . This method will start the process of modifying an existing program slot.
      * @param programSlot
      * @param duration
      * @param dateOfProgram
@@ -72,7 +72,7 @@ public class ManageScheduleService {
     }
     
     /**
-     * delete the program slot
+     * processDelete . This method will start the process of deleting an existing program slot.
      * @param duration
      * @param dateOfProgram
      * @throws NotFoundException

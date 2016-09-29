@@ -16,13 +16,15 @@ public class RoleDelegate {
     
     RoleService service = null;
     
+    /**
+     * Constructor. It takes no argument and provides the most simple way to create an object instance.
+     */
     public RoleDelegate() {
         service = new RoleService();
     }
     
     /**
-     * Select role by name.
-     * 
+     * find. This method will select role by name.
      * @param role Name of the role.
      * @return Selected role. Return null if no role is found.
      */

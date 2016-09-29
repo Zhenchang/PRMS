@@ -21,8 +21,7 @@ public class UserDelegate {
     }
     
     /**
-     * Modify user.
-     * 
+     * processModify. This method will modify user.
      * @param user User information to be updated.
      */
     public void processModify(User user) {
@@ -30,8 +29,7 @@ public class UserDelegate {
     }
     
     /**
-     * Delete the specific user.
-     * 
+     * processDelete. This method will delete a specific user.
      * @param user User to be deleted.
      */
     public void processDelete(User user) {
@@ -39,8 +37,7 @@ public class UserDelegate {
     }
     
     /**
-     * Create a new user.
-     * 
+     * processCreate. This method will create a new user.
      * @param user User to be created. 
      */
     public void processCreate(User user) {

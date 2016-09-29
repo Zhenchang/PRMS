@@ -29,8 +29,8 @@ public class UserService {
     }
     
     /**
-     * Create a new user.
-     * @param user The user to be created. 
+     * createUser. This method will create a new user.
+     * @param user 
      */
     public void createUser(User user) {
         try {
@@ -41,8 +41,7 @@ public class UserService {
     }
     
     /**
-     * Modify specific user information.
-     * 
+     * modifyUser. This method will modify specific user information.
      * @param user The user to be modify. 
      */
     public void modifyUser(User user) {
@@ -54,8 +53,7 @@ public class UserService {
     }
     
     /**
-     * Delete the specific user.
-     * 
+     * deleteUser. This method will delete the specific user.
      * @param user The user to be delete. 
      */
     public void deleteUser(User user) {

@@ -23,8 +23,7 @@ public class ReviewSelectUserDelegate {
     }
     
     /**
-     * Retrieve all the users in the system.
-     * 
+     * reviewSelectUser. This method will retrieve all the users in the system.
      * @return List of user.
      */
     public List<User> reviewSelectUser() {
@@ -32,7 +31,7 @@ public class ReviewSelectUserDelegate {
     }
     
      /**
-     * Retrieve the users with specific role.
+     * reviewSelectUser. This method will retrieve the users with specific role.
      * @param role Specific role.
      * @return List of users with specific role.
      */
