@@ -27,17 +27,18 @@ import sg.edu.nus.iss.phoenix.schedule.dao.ScheduleDAO;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.schedule.service.ManageScheduleService;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.mock;
 
 /**
  *
  * @author zz
  */
-public class ScheduleTest {
+public class ManageScheduleServiceTest {
     
     ManageScheduleService manageScheduleService;
     ProgramSlot programSlot;
     
-    public ScheduleTest() {
+    public ManageScheduleServiceTest() {
         
         
     }
@@ -97,9 +98,9 @@ public class ScheduleTest {
             List<ProgramSlot> list = manageScheduleService.getAllProgramSlots();
             Assert.assertTrue(list.size() != 0);
         } catch (SQLException ex) {
-            Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotFoundException ex) {
-            Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -119,9 +120,9 @@ public class ScheduleTest {
             List<ProgramSlot> list = manageScheduleService.getAllProgramSlots(timestamp);
             Assert.assertTrue(list.size() != 0);
         } catch (SQLException ex) {
-            Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotFoundException ex) {
-            Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -135,7 +136,7 @@ public class ScheduleTest {
         manageScheduleService.processCreate(programSlot);
         Assert.assertTrue(true);
         } catch (Exception ex) {
-            Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     
     }
@@ -151,7 +152,7 @@ public class ScheduleTest {
         manageScheduleService.processModify(programSlot, duration, dateOfProgram);
         Assert.assertTrue(true);
         } catch (Exception ex) {
-            Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -166,7 +167,7 @@ public class ScheduleTest {
         manageScheduleService.processDelete(duration, dateOfProgram);
         Assert.assertTrue(true);
         } catch (Exception ex) {
-            Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

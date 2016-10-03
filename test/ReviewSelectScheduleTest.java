@@ -32,6 +32,7 @@ import sg.edu.nus.iss.phoenix.schedule.service.ReviewSelectScheduleService;
 
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.mock;
 
 /**
  *
@@ -102,9 +103,9 @@ public class ReviewSelectScheduleTest {
             List<WeeklySchedule> list = this.reviewSelectScheduleService.getAllWeek(2016);
             Assert.assertTrue(list.size() != 0);
         } catch (SQLException ex) {
-            Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotFoundException ex) {
-            Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -124,9 +125,9 @@ public class ReviewSelectScheduleTest {
             Assert.assertTrue(list.size() != 0);
             
         } catch (SQLException ex) {
-            Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotFoundException ex) {
-            Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

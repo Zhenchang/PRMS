@@ -26,17 +26,18 @@ import sg.edu.nus.iss.phoenix.user.delegate.ManageUserDelegate;
 import sg.edu.nus.iss.phoenix.user.service.ManageUserService;
 import static org.mockito.Mockito.when;
 import sg.edu.nus.iss.phoenix.authenticate.entity.Role;
+import static org.mockito.Mockito.mock;
 
 /**
  *
  * @author zz
  */
-public class SelectUserTest {
+public class ReviewSelectUserServiceTest {
     
     ManageUserDelegate manageUserDelegate;
     ManageScheduleService manageScheduleService;
     
-    public SelectUserTest() {
+    public ReviewSelectUserServiceTest() {
     }
     
     @BeforeClass
@@ -78,7 +79,7 @@ public class SelectUserTest {
             System.out.println("size: "+ manageUserService.getAllPresenter().size());
             Assert.assertTrue(manageUserService.getAllPresenter().size() == 0);
         } catch (SQLException ex) {
-            Logger.getLogger(SelectUserTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReviewSelectUserServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -89,7 +90,7 @@ public class SelectUserTest {
             System.out.println("size: "+this.manageScheduleService.getAllProgramSlots().size());
             Assert.assertTrue(this.manageScheduleService.getAllProgramSlots().size() != 0);
         } catch (Exception ex) {
-            Logger.getLogger(SelectUserTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReviewSelectUserServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         
 
