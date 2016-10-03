@@ -10,7 +10,9 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
+import sg.edu.nus.iss.phoenix.schedule.entity.AnnualSchedule;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
+import sg.edu.nus.iss.phoenix.schedule.entity.WeeklySchedule;
 
 
 public interface ScheduleDAO {
@@ -167,4 +169,8 @@ public interface ScheduleDAO {
 			throws SQLException;
         
         public List<ProgramSlot> load(Timestamp week) throws NotFoundException, SQLException;
+
+    public List<AnnualSchedule> getAllAnnual() throws NotFoundException, SQLException;
+
+    public List<WeeklySchedule> getAllWeek(int year)  throws NotFoundException, SQLException ;
 }

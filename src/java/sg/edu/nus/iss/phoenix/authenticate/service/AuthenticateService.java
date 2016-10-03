@@ -22,6 +22,12 @@ public class AuthenticateService {
 	UserDao udao;
 	RoleDao rdao;
 
+    public AuthenticateService(UserDao udao, RoleDao rdao) {
+        this.udao = udao;
+        this.rdao = rdao;
+    }
+        
+
 	public AuthenticateService() {
 		super();
 		// TODO Auto-generated constructor stub

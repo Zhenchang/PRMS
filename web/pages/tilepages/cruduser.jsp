@@ -18,8 +18,6 @@
             <c:param name="insert" value="true"/>        
         </c:url>
         <a href="${url}"><fmt:message key="label.cruduser.add"/></a>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="${url}"><fmt:message key="label.cruduser.selectProdPresen"/></a>
         <br/><br/>
         <table class="borderAll">
             <tr>

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,11 +19,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 import sg.edu.nus.iss.phoenix.authenticate.entity.Role;
 import sg.edu.nus.iss.phoenix.authenticate.entity.User;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
+import sg.edu.nus.iss.phoenix.schedule.dao.ScheduleDAO;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.schedule.service.ManageScheduleService;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -83,7 +87,14 @@ public class ScheduleTest {
     @Test
     public void testGetAllProgramSlots(){
         try {
-            List<ProgramSlot> list = this.manageScheduleService.getAllProgramSlots();
+            Timestamp timestamp;
+            timestamp = Timestamp.valueOf("2016-9-27 00:30:00");
+            ScheduleDAO scheudleDao = mock(ScheduleDAO.class);
+            ProgramSlot programSlot = mock(ProgramSlot.class);
+            ProgramSlot[] slots = {programSlot};
+            ManageScheduleService manageScheduleService = new ManageScheduleService(scheudleDao);
+            when(manageScheduleService.getAllProgramSlots()).thenReturn(Arrays.asList(slots));
+            List<ProgramSlot> list = manageScheduleService.getAllProgramSlots();
             Assert.assertTrue(list.size() != 0);
         } catch (SQLException ex) {
             Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,7 +111,12 @@ public class ScheduleTest {
         try {
             Timestamp timestamp;
             timestamp = Timestamp.valueOf("2016-9-27 00:30:00");
-            List<ProgramSlot> list = this.manageScheduleService.getAllProgramSlots(timestamp);
+            ScheduleDAO scheudleDao = mock(ScheduleDAO.class);
+            ProgramSlot programSlot = mock(ProgramSlot.class);
+            ProgramSlot[] slots = {programSlot};
+            ManageScheduleService manageScheduleService = new ManageScheduleService(scheudleDao);
+            when(manageScheduleService.getAllProgramSlots(timestamp)).thenReturn(Arrays.asList(slots));
+            List<ProgramSlot> list = manageScheduleService.getAllProgramSlots(timestamp);
             Assert.assertTrue(list.size() != 0);
         } catch (SQLException ex) {
             Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,6 +129,10 @@ public class ScheduleTest {
     public void testProcessCreate(){
         try {
         //    this.manageScheduleService.processCreate(this.programSlot);
+        ScheduleDAO scheudleDao = mock(ScheduleDAO.class);
+        ProgramSlot programSlot = mock(ProgramSlot.class);
+        ManageScheduleService manageScheduleService = new ManageScheduleService(scheudleDao);
+        manageScheduleService.processCreate(programSlot);
         Assert.assertTrue(true);
         } catch (Exception ex) {
             Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,7 +143,12 @@ public class ScheduleTest {
     @Test
     public void testProcessModify(){
         try {
-        //    this.manageScheduleService.processModify(this.programSlot);
+        ScheduleDAO scheudleDao = mock(ScheduleDAO.class);
+        ProgramSlot programSlot = mock(ProgramSlot.class);
+        Time duration = mock(Time.class);
+        Timestamp dateOfProgram = mock(Timestamp.class);
+        ManageScheduleService manageScheduleService = new ManageScheduleService(scheudleDao);
+        manageScheduleService.processModify(programSlot, duration, dateOfProgram);
         Assert.assertTrue(true);
         } catch (Exception ex) {
             Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,7 +158,12 @@ public class ScheduleTest {
     @Test
     public void testProcessDelete(){
         try {
-        //    this.manageScheduleService.processDelete(this.programSlot);
+        ScheduleDAO scheudleDao = mock(ScheduleDAO.class);
+        ProgramSlot programSlot = mock(ProgramSlot.class);
+        Time duration = mock(Time.class);
+        Timestamp dateOfProgram = mock(Timestamp.class);
+        ManageScheduleService manageScheduleService = new ManageScheduleService(scheudleDao);
+        manageScheduleService.processDelete(duration, dateOfProgram);
         Assert.assertTrue(true);
         } catch (Exception ex) {
             Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);

@@ -23,6 +23,10 @@ import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 public class ManageScheduleService {
     DAOFactory factory;
     ScheduleDAO scheduleDAO;
+
+    public ManageScheduleService(ScheduleDAO scheduleDAO) {
+        this.scheduleDAO = scheduleDAO;
+    }
     
     public ManageScheduleService(){
         this.factory = new DAOFactoryImpl();

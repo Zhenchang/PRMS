@@ -22,6 +22,10 @@ public class UserService {
     
     DAOFactory factory;
     UserDao userDao;
+
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
     
     public UserService() {
         factory = new DAOFactoryImpl();

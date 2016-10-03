@@ -22,7 +22,11 @@ import sg.edu.nus.iss.phoenix.schedule.entity.WeeklySchedule;
  */
 public class ReviewSelectScheduleService {
     DAOFactory factory;
-    ScheduleDAOImpl scheduleDAO;
+    ScheduleDAO scheduleDAO;
+
+    public ReviewSelectScheduleService(ScheduleDAO scheduleDAO) {
+        this.scheduleDAO = scheduleDAO;
+    }
     
     public ReviewSelectScheduleService(){
         this.factory = new DAOFactoryImpl();

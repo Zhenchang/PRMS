@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,14 +19,19 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 import sg.edu.nus.iss.phoenix.authenticate.entity.Role;
 import sg.edu.nus.iss.phoenix.authenticate.entity.User;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
+import sg.edu.nus.iss.phoenix.schedule.dao.ScheduleDAO;
 import sg.edu.nus.iss.phoenix.schedule.entity.AnnualSchedule;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.schedule.entity.WeeklySchedule;
 import sg.edu.nus.iss.phoenix.schedule.service.ManageScheduleService;
 import sg.edu.nus.iss.phoenix.schedule.service.ReviewSelectScheduleService;
+
+import org.mockito.Mockito;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -86,6 +92,13 @@ public class ReviewSelectScheduleTest {
     @Test
     public void testGetAllWeeks(){
         try {
+            ScheduleDAO scheudleDao = mock(ScheduleDAO.class);
+            ReviewSelectScheduleService reviewSelectScheduleService = new ReviewSelectScheduleService(scheudleDao);
+            WeeklySchedule weeklySchedule = mock(WeeklySchedule.class);
+            WeeklySchedule[] weeks = {weeklySchedule};
+            when(scheudleDao.getAllWeek(2016)).thenReturn(Arrays.asList(weeks));
+        
+        
             List<WeeklySchedule> list = this.reviewSelectScheduleService.getAllWeek(2016);
             Assert.assertTrue(list.size() != 0);
         } catch (SQLException ex) {
@@ -101,10 +114,15 @@ public class ReviewSelectScheduleTest {
     @Test
     public void testGetAllAnnual(){
         try {
-            Timestamp timestamp;
-            timestamp = Timestamp.valueOf("2016-9-27 00:30:00");
-            List<AnnualSchedule> list = this.reviewSelectScheduleService.getAllAnnual();
+            ScheduleDAO scheudleDao = mock(ScheduleDAO.class);
+            ReviewSelectScheduleService reviewSelectScheduleService = new ReviewSelectScheduleService(scheudleDao);
+            AnnualSchedule annualSchedule = mock(AnnualSchedule.class);
+            AnnualSchedule[] annuals = {annualSchedule};
+            when(scheudleDao.getAllAnnual()).thenReturn(Arrays.asList(annuals));
+
+            List<AnnualSchedule> list = reviewSelectScheduleService.getAllAnnual();
             Assert.assertTrue(list.size() != 0);
+            
         } catch (SQLException ex) {
             Logger.getLogger(ScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotFoundException ex) {

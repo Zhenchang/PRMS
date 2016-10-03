@@ -495,6 +495,7 @@ public class ScheduleDAOImpl implements ScheduleDAO{
      * @throws NotFoundException
      * @throws SQLException 
      */
+    @Override
     public List<AnnualSchedule> getAllAnnual() throws NotFoundException, SQLException {
         String sql = "select year from `annual-schedule` ";
         List<AnnualSchedule> annuals = new ArrayList();
@@ -519,6 +520,7 @@ public class ScheduleDAOImpl implements ScheduleDAO{
      * @throws NotFoundException
      * @throws SQLException 
      */
+    @Override
     public List<WeeklySchedule> getAllWeek(int year) throws NotFoundException, SQLException {
         String sql = "select startDate from `weekly-schedule` where year = ?";
         List<WeeklySchedule> weeks = new ArrayList<WeeklySchedule>();

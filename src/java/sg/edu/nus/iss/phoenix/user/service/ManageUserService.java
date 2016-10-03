@@ -23,6 +23,10 @@ public class ManageUserService {
     
     private DAOFactoryImpl daoFactroy;
     private UserDao userDao;
+
+    public ManageUserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
     
     /**
      * Constructor. It takes no arguments and provides the most simple way to create an object instance.
