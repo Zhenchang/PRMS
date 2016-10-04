@@ -20,15 +20,15 @@
                 <table cellpadding=4 cellspacing=2 border=0>
                     <tr>
                         <td><fmt:message key="label.crudschedule.duration" /></td>
-                        <td><input id="duration" type="text" name="duration" value="${param['duration']}" maxlength=20000></td> </td>
+                        <td><input id="duration" type="text" name="duration" value="${param['duration']}" maxlength=20000> &nbsp; hh:mm:ss</td> </td>
                     </tr>
                     <tr>
                         <td><fmt:message key="label.crudschedule.dateOfProgram" /></td>
-                        <td><input id="dateOfProgram" type="text" name="dateOfProgram" value="${param['dateOfProgram']}" maxlength=2000></td>
+                        <td><input id="dateOfProgram" type="text" name="dateOfProgram" value="${param['dateOfProgram']}" maxlength=2000>&nbsp; yyyy-mm-dd hh:mm:ss</td>
                     </tr>
                     <tr>	
                         <td><fmt:message key="label.crudschedule.startTime" /></td>
-                        <td><input type="text" name="startTime" value="${param['startTime']}" maxlength=21000></td>
+                        <td><input type="text" name="startTime" value="${param['startTime']}" maxlength=21000> &nbsp; yyyy-mm-dd hh:mm:ss </td>
                     </tr>
                     <tr>
                         <td><fmt:message key="label.crudschedule.programName" /></td>
