@@ -15,7 +15,7 @@ import sg.edu.nus.iss.phoenix.schedule.service.ReviewSelectScheduleService;
 
 /**
  *
- * @author zz
+ * @author Zaid
  */
 public class ReviewSelectScheduleDelegate {
     

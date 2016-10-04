@@ -19,7 +19,7 @@ import sg.edu.nus.iss.phoenix.user.delegate.ManageUserDelegate;
 
 /**
  *
- * @author zz
+ * @author Zhai
  */
 @Action("addeditscheudle")
 public class AddEditScheduleCmd implements Perform {

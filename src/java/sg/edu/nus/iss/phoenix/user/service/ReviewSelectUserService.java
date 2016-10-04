@@ -18,7 +18,7 @@ import sg.edu.nus.iss.phoenix.core.dao.DAOFactoryImpl;
 
 /**
  *
- * @author Liu Zhenchang
+ * @author Vishnu
  */
 public class ReviewSelectUserService {
 

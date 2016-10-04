@@ -25,7 +25,7 @@ import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
 /**
  *
- * @author zz
+ * @author Zaid
  */
 @Action("selectannual")
 public class SelectAnnualCmd implements Perform{

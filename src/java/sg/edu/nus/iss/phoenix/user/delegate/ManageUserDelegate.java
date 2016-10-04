@@ -15,7 +15,7 @@ import sg.edu.nus.iss.phoenix.user.service.ManageUserService;
 
 /**
  *
- * @author zz
+ * @author Zhai
  */
 public class ManageUserDelegate {
     

@@ -30,7 +30,7 @@ import static org.mockito.Mockito.mock;
 
 /**
  *
- * @author zz
+ * @author Ankan
  */
 public class ReviewSelectUserServiceTest {
     
@@ -70,13 +70,13 @@ public class ReviewSelectUserServiceTest {
         try {
             UserDao userDao = mock(UserDao.class);
             ManageUserService manageUserService = new ManageUserService(userDao);
-            User user = new User("a");
+            User user = new User("Lee");
             List<Role> roles = new ArrayList<Role>();
             roles.add(new Role("presenter"));
             user.setRoles(roles);
             User[] users = { user };
             when(userDao.searchMatching(user)).thenReturn(Arrays.asList(users));
-            System.out.println("size: "+ manageUserService.getAllPresenter().size());
+            System.out.println("Size: "+ manageUserService.getAllPresenter().size());
             Assert.assertTrue(manageUserService.getAllPresenter().size() == 0);
         } catch (SQLException ex) {
             Logger.getLogger(ReviewSelectUserServiceTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,7 +87,7 @@ public class ReviewSelectUserServiceTest {
     public void testGetProgramSlot(){
 
         try {
-            System.out.println("size: "+this.manageScheduleService.getAllProgramSlots().size());
+            System.out.println("Size: "+this.manageScheduleService.getAllProgramSlots().size());
             Assert.assertTrue(this.manageScheduleService.getAllProgramSlots().size() != 0);
         } catch (Exception ex) {
             Logger.getLogger(ReviewSelectUserServiceTest.class.getName()).log(Level.SEVERE, null, ex);

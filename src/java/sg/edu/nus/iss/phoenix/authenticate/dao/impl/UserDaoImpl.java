@@ -474,7 +474,7 @@ public class UserDaoImpl implements UserDao {
 
     /**
      * @throws SQLException
-     * @see
+     * @param role
      * sg.​edu.​nus.​iss.​phoenix.​authenticate.​dao.​UserDao#loadByRole(sg.​edu.​nus.​iss.​phoenix.​authenticate.​entity.Role)
      */
     @Override

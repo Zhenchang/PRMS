@@ -25,7 +25,7 @@ import sg.edu.nus.iss.phoenix.schedule.entity.WeeklySchedule;
 
 /**
  *
- * @author zz
+ * @author Zaid
  */
 @Action("selectweek")
 public class SelectWeekCmd implements Perform{

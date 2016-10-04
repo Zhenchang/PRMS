@@ -27,7 +27,7 @@ import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
 /**
  *
- * @author zz
+ * @author Zaid
  */
 @Action("deleteschedule")
 public class DeleteScheduleCmd implements Perform{

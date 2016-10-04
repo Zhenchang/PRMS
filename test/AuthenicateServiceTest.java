@@ -30,7 +30,7 @@ import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
 
 /**
  *
- * @author zz
+ * @author Vishnu
  */
 public class AuthenicateServiceTest {
 

@@ -36,7 +36,7 @@ import static org.mockito.Mockito.mock;
 
 /**
  *
- * @author zz
+ * @author Zaid
  */
 public class ReviewSelectScheduleTest {
     

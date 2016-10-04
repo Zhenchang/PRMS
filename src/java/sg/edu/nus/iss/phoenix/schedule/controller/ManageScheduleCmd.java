@@ -22,7 +22,7 @@ import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
 /**
  *
- * @author zz
+ * @author Zhai
  */
 @Action("manageschedule")
 public class ManageScheduleCmd implements Perform {

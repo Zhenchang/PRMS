@@ -31,7 +31,7 @@ import static org.mockito.Mockito.mock;
 
 /**
  *
- * @author zz
+ * @author Zhai
  */
 public class ManageScheduleServiceTest {
     

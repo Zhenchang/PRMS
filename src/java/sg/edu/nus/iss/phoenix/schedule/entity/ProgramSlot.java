@@ -11,7 +11,7 @@ import sg.edu.nus.iss.phoenix.authenticate.entity.User;
 
 /**
  *
- * @author zz
+ * @author Zhai
  */
 public class ProgramSlot {
     private User presenter;

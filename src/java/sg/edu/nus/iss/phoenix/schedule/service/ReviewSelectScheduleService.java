@@ -6,7 +6,6 @@
 package sg.edu.nus.iss.phoenix.schedule.service;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 import sg.edu.nus.iss.phoenix.core.dao.DAOFactory;
 import sg.edu.nus.iss.phoenix.core.dao.DAOFactoryImpl;
@@ -18,7 +17,7 @@ import sg.edu.nus.iss.phoenix.schedule.entity.WeeklySchedule;
 
 /**
  *
- * @author zz
+ * @author Ankan
  */
 public class ReviewSelectScheduleService {
     DAOFactory factory;

@@ -18,7 +18,7 @@ import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
 /**
  *
- * @author zz 
+ * @author Ankan
  */
 public class ManageScheduleService {
     DAOFactory factory;

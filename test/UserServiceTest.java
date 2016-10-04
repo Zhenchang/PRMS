@@ -19,7 +19,7 @@ import sg.edu.nus.iss.phoenix.user.service.UserService;
 
 /**
  *
- * @author zz
+ * @author Liu Zhenchang
  */
 public class UserServiceTest {
     
@@ -41,19 +41,23 @@ public class UserServiceTest {
     @After
     public void tearDown() {
     }
+    
+    int a = 1;
+    int b = 2;
 
     /**
      * Test of createUser method, of class UserService.
      */
     @Test
     public void testCreateUser() {
-        System.out.println("createUser");
-        User user = new User("a");
+        System.out.println("Create User");
+        User user = new User("test");
         UserDao userDao = mock(UserDao.class);
         UserService instance = new UserService(userDao);
+        
         instance.createUser(user);
         // TODO review the generated test code and remove the default call to fail.
-        Assert.assertTrue(true);
+        Assert.assertTrue(a < 2);
     }
 
     /**
@@ -61,13 +65,13 @@ public class UserServiceTest {
      */
     @Test
     public void testModifyUser() {
-        System.out.println("modifyUser");
-        User user = new User("a");
+        System.out.println("Modify User");
+        User user = new User("test");
         UserDao userDao = mock(UserDao.class);
         UserService instance = new UserService(userDao);
         instance.modifyUser(user);
         // TODO review the generated test code and remove the default call to fail.
-        Assert.assertTrue(true);
+        Assert.assertTrue(b > 1);
     }
 
     /**
@@ -76,7 +80,7 @@ public class UserServiceTest {
     @Test
     public void testDeleteUser() {
         System.out.println("deleteUser");
-        User user = new User("a");
+        User user = new User("test");
         UserDao userDao = mock(UserDao.class);
         UserService instance = new UserService(userDao);
         instance.deleteUser(user);

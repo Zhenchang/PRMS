@@ -7,7 +7,7 @@ package sg.edu.nus.iss.phoenix.schedule.entity;
 
 /**
  *
- * @author zz
+ * @author Zhai
  */
 public class AnnualSchedule {
     private int year;

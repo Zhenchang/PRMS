@@ -17,7 +17,7 @@ import sg.edu.nus.iss.phoenix.schedule.service.ManageScheduleService;
 
 /**
  *
- * @author zz
+ * @author Zhai
  */
 public class ManageScheduleDelegate {
     

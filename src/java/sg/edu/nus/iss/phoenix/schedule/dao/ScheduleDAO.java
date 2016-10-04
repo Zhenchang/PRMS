@@ -34,7 +34,8 @@ public interface ScheduleDAO {
 	 * convenience method for the real load-method which accepts the valueObject
 	 * as a parameter. Returned valueObject will be created using the
 	 * createValueObject() method.
-     * @param id
+     * @param duration
+     * @param dateOfProgram
      * @return 
      * @throws sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException 
      * @throws java.sql.SQLException 
@@ -159,7 +160,8 @@ public interface ScheduleDAO {
 	 * those criteria you specified. Those instance-variables that have NULL
 	 * values are excluded in search-criteria.
 	 * 
-	 * @param valueObject
+	 * @param duration
+         * @param dateOfProgram
 	 *            This parameter contains the class instance where search will
 	 *            be based. Primary-key field should not be set.
      * @return 
