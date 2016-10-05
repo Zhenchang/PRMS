@@ -16,7 +16,7 @@ import sg.edu.nus.iss.phoenix.schedule.dao.impl.ScheduleDAOImpl;
 
 /**
  *
- * @author zz
+ * @author Ankan
  */
 public class ReviewSelectScheduleService {
     DAOFactory factory;

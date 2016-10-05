@@ -12,7 +12,7 @@ import sg.edu.nus.iss.phoenix.user.service.ReviewSelectUserService;
 
 /**
  *
- * @author Liu Zhenchang
+ * @author Vishnu
  */
 public class ReviewSelectUserDelegate {
     

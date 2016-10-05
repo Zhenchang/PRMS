@@ -17,7 +17,7 @@ import sg.edu.nus.iss.phoenix.user.delegate.ReviewSelectUserDelegate;
 
 /**
  *
- * @author Liu Zhenchang
+ * @author Vishnu
  */
 @Action("manageuser")
 public class ManageUserCmd implements Perform {

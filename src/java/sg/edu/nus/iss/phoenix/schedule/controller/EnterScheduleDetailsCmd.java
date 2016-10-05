@@ -24,7 +24,7 @@ import sg.edu.nus.iss.phoenix.user.delegate.ManageUserDelegate;
 
 /**
  *
- * @author zz
+ * @author zaid
  */
 @Action("enterschedule")
 public class EnterScheduleDetailsCmd implements Perform{

@@ -21,7 +21,7 @@ import sg.edu.nus.iss.phoenix.user.delegate.UserDelegate;
 
 /**
  *
- * @author Liu Zhenchang
+ * @author Vishnu
  */
 @Action("enteruser")
 public class EnterUserDetailsCmd implements Perform {

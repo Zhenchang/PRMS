@@ -23,7 +23,7 @@ import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
 /**
  *
- * @author zz
+ * @author zaid
  */
 @Action("selectweek")
 public class SelectWeekCmd implements Perform{
