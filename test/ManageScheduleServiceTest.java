@@ -119,8 +119,10 @@ public class ManageScheduleServiceTest {
             Assert.assertTrue(list.size() != 0);
         } catch (SQLException ex) {
             Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+            fail();
         } catch (NotFoundException ex) {
             Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+            fail();
         }
     }
     
@@ -132,11 +134,12 @@ public class ManageScheduleServiceTest {
         ProgramSlot programSlot = mock(ProgramSlot.class);
         ManageScheduleService manageScheduleService = new ManageScheduleService(scheudleDao);
         manageScheduleService.processCreate(programSlot);
-        Assert.assertTrue(true);
+        
         } catch (Exception ex) {
             Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+            fail();
         }
-    
+        Assert.assertTrue(true);
     }
 
     @Test
@@ -148,10 +151,12 @@ public class ManageScheduleServiceTest {
         Timestamp dateOfProgram = mock(Timestamp.class);
         ManageScheduleService manageScheduleService = new ManageScheduleService(scheudleDao);
         manageScheduleService.processModify(programSlot, duration, "2016-9-27");
-        Assert.assertTrue(true);
+        
         } catch (Exception ex) {
             Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+            fail();
         }
+        Assert.assertTrue(true);
     }
     
     @Test
@@ -163,9 +168,11 @@ public class ManageScheduleServiceTest {
         Timestamp dateOfProgram = mock(Timestamp.class);
         ManageScheduleService manageScheduleService = new ManageScheduleService(scheudleDao);
         manageScheduleService.processDelete(duration, "2016-9-27");
-        Assert.assertTrue(true);
+        
         } catch (Exception ex) {
             Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+            fail();
         }
+        Assert.assertTrue(true);
     }
 }

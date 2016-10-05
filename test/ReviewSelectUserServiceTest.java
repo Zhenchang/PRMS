@@ -76,7 +76,7 @@ public class ReviewSelectUserServiceTest {
             user.setRoles(roles);
             User[] users = { user };
             when(userDao.searchMatching(user)).thenReturn(Arrays.asList(users));
-            System.out.println("Size: "+ manageUserService.getAllPresenter().size());
+            System.out.println("Sizeaaa: "+ manageUserService.getAllPresenter().size());
             Assert.assertTrue(manageUserService.getAllPresenter().size() == 0);
         } catch (SQLException ex) {
             Logger.getLogger(ReviewSelectUserServiceTest.class.getName()).log(Level.SEVERE, null, ex);
