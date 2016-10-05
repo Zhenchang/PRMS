@@ -39,7 +39,7 @@ public class ReviewSelectScheduleService {
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<WeeklySchedule> getAllWeek(int year) throws NotFoundException, SQLException{
+    public List<String> getAllWeek(String year) throws NotFoundException, SQLException{
         return this.scheduleDAO.getAllWeek(year);
     }
     
@@ -49,7 +49,7 @@ public class ReviewSelectScheduleService {
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<AnnualSchedule> getAllAnnual() throws NotFoundException, SQLException{
+    public List<String> getAllAnnual() throws NotFoundException, SQLException{
         return this.scheduleDAO.getAllAnnual();
     }
 }

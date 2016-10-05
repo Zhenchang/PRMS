@@ -15,7 +15,7 @@ import sg.edu.nus.iss.phoenix.schedule.service.ReviewSelectScheduleService;
 
 /**
  *
- * @author Zaid
+ * @author zaid
  */
 public class ReviewSelectScheduleDelegate {
     
@@ -32,7 +32,7 @@ public class ReviewSelectScheduleDelegate {
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<WeeklySchedule> getAllWeek(int year) throws NotFoundException, SQLException{
+    public List<String> getAllWeek(String year) throws NotFoundException, SQLException{
         return this.reviewSelectScheduleService.getAllWeek(year);
     }
     
@@ -42,7 +42,7 @@ public class ReviewSelectScheduleDelegate {
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<AnnualSchedule> getAllAnnual() throws NotFoundException, SQLException{
+    public List<String> getAllAnnual() throws NotFoundException, SQLException{
         return this.reviewSelectScheduleService.getAllAnnual();
     }
     

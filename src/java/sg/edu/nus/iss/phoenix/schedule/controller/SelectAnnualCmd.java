@@ -25,7 +25,7 @@ import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
 /**
  *
- * @author Zaid
+ * @author zaid
  */
 @Action("selectannual")
 public class SelectAnnualCmd implements Perform{
@@ -34,11 +34,7 @@ public class SelectAnnualCmd implements Perform{
     public String perform(String string, HttpServletRequest hsr, HttpServletResponse hsr1) throws IOException, ServletException {
         try {
             ReviewSelectScheduleDelegate reviewSelectSchedule = new ReviewSelectScheduleDelegate();
-            List<AnnualSchedule> annualschedule = reviewSelectSchedule.getAllAnnual();
-            List<Integer> annuals = new ArrayList();
-            for(int i=0;i < annualschedule.size();i++){
-                annuals.add(annualschedule.get(i).getYear());
-            }
+            List<String> annuals = reviewSelectSchedule.getAllAnnual();
             hsr.setAttribute("annuals", annuals);
             return "/pages/selectannual.jsp";
         } catch (SQLException ex) {

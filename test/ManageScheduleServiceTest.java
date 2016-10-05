@@ -55,7 +55,7 @@ public class ManageScheduleServiceTest {
     public void setUp() {
         this.manageScheduleService = new ManageScheduleService();
         this.programSlot = new ProgramSlot();
-        this.programSlot.setDateOfProgram(Timestamp.valueOf("2016-8-9 00:30:00"));
+        this.programSlot.setDateOfProgram("2016-8-9");
         this.programSlot.setDuration(Time.valueOf("00:30:00"));
         User presenter = new User();
         presenter.setId("presenter");
@@ -72,7 +72,7 @@ public class ManageScheduleServiceTest {
         presenter.setRoles(roles1);
         this.programSlot.setProducer(producer);
         this.programSlot.setProgramName("ppk");
-        this.programSlot.setStartTime(Timestamp.valueOf("2016-8-9 00:30:00"));
+        this.programSlot.setStartTime(Time.valueOf("00:30:00"));
     }
     
     @After
@@ -88,8 +88,7 @@ public class ManageScheduleServiceTest {
     @Test
     public void testGetAllProgramSlots(){
         try {
-            Timestamp timestamp;
-            timestamp = Timestamp.valueOf("2016-9-27 00:30:00");
+
             ScheduleDAO scheudleDao = mock(ScheduleDAO.class);
             ProgramSlot programSlot = mock(ProgramSlot.class);
             ProgramSlot[] slots = {programSlot};
@@ -110,14 +109,13 @@ public class ManageScheduleServiceTest {
     @Test
     public void testGetAllProgramSlotsByTimestamp(){
         try {
-            Timestamp timestamp;
-            timestamp = Timestamp.valueOf("2016-9-27 00:30:00");
+
             ScheduleDAO scheudleDao = mock(ScheduleDAO.class);
             ProgramSlot programSlot = mock(ProgramSlot.class);
             ProgramSlot[] slots = {programSlot};
             ManageScheduleService manageScheduleService = new ManageScheduleService(scheudleDao);
-            when(manageScheduleService.getAllProgramSlots(timestamp)).thenReturn(Arrays.asList(slots));
-            List<ProgramSlot> list = manageScheduleService.getAllProgramSlots(timestamp);
+            when(manageScheduleService.getAllProgramSlots("2016-9-27")).thenReturn(Arrays.asList(slots));
+            List<ProgramSlot> list = manageScheduleService.getAllProgramSlots("2016-9-27");
             Assert.assertTrue(list.size() != 0);
         } catch (SQLException ex) {
             Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -149,7 +147,7 @@ public class ManageScheduleServiceTest {
         Time duration = mock(Time.class);
         Timestamp dateOfProgram = mock(Timestamp.class);
         ManageScheduleService manageScheduleService = new ManageScheduleService(scheudleDao);
-        manageScheduleService.processModify(programSlot, duration, dateOfProgram);
+        manageScheduleService.processModify(programSlot, duration, "2016-9-27");
         Assert.assertTrue(true);
         } catch (Exception ex) {
             Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,7 +162,7 @@ public class ManageScheduleServiceTest {
         Time duration = mock(Time.class);
         Timestamp dateOfProgram = mock(Timestamp.class);
         ManageScheduleService manageScheduleService = new ManageScheduleService(scheudleDao);
-        manageScheduleService.processDelete(duration, dateOfProgram);
+        manageScheduleService.processDelete(duration, "2016-9-27");
         Assert.assertTrue(true);
         } catch (Exception ex) {
             Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);

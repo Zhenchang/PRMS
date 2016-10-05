@@ -25,7 +25,7 @@ import sg.edu.nus.iss.phoenix.schedule.entity.WeeklySchedule;
 
 /**
  *
- * @author Zaid
+ * @author zaid
  */
 @Action("selectweek")
 public class SelectWeekCmd implements Perform{
@@ -34,12 +34,8 @@ public class SelectWeekCmd implements Perform{
     public String perform(String string, HttpServletRequest hsr, HttpServletResponse hsr1) throws IOException, ServletException {
         try {
             ReviewSelectScheduleDelegate reviewSelectSchedule = new ReviewSelectScheduleDelegate();
-            int year = Integer.parseInt(hsr.getParameter("year"));
-            List<WeeklySchedule> weeksObj = reviewSelectSchedule.getAllWeek(year);
-            List<Timestamp> weeks = new ArrayList<Timestamp>();
-            for(int i = 0;i < weeksObj.size();i++){
-                weeks.add(weeksObj.get(i).getStartDate());
-            }
+            String year = hsr.getParameter("year");
+            List<String> weeks = reviewSelectSchedule.getAllWeek(year);
             hsr.setAttribute("weeks", weeks);
             return "/pages/selectweek.jsp";
         } catch (SQLException ex) {

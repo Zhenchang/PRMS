@@ -10,8 +10,6 @@ import at.nocturne.api.Perform;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,23 +25,24 @@ import sg.edu.nus.iss.phoenix.user.delegate.ManageUserDelegate;
 
 /**
  *
- * @author Zaid
+ * @author zaid
  */
 @Action("enterschedule")
 public class EnterScheduleDetailsCmd implements Perform{
 
     @Override
-    public String perform(String string, HttpServletRequest hsr, HttpServletResponse hsr1) throws IOException, ServletException {
+    public String perform(String string, HttpServletRequest hsr, HttpServletResponse resp) throws IOException, ServletException {
         try {
             ManageUserDelegate manageUserDelegate = new ManageUserDelegate();
             ManageScheduleDelegate manageScheduleDelegate = new ManageScheduleDelegate();
             ProgramSlot programSlot = new ProgramSlot();
-            programSlot.setDateOfProgram(Timestamp.valueOf(hsr.getParameter("dateOfProgram")));
+            programSlot.setDateOfProgram(hsr.getParameter("dateOfProgram"));
             programSlot.setDuration(Time.valueOf(hsr.getParameter("duration")));
             programSlot.setPresenter(manageUserDelegate.getUserById(hsr.getParameter("presenter")));
             programSlot.setProducer(manageUserDelegate.getUserById(hsr.getParameter("producer")));
             programSlot.setProgramName(hsr.getParameter("programName"));
-            programSlot.setStartTime(Timestamp.valueOf(hsr.getParameter("startTime")));
+            programSlot.setStartTime(Time.valueOf(hsr.getParameter("startTime")));
+            programSlot.setStartDate(hsr.getParameter("startDate"));
             String ins = hsr.getParameter("ins");
             if(ins.equals("true")){
                 manageScheduleDelegate.processCreate(programSlot);
@@ -56,16 +55,10 @@ public class EnterScheduleDetailsCmd implements Perform{
 
             return "/pages/crudschedule.jsp";*/
             ReviewSelectScheduleDelegate reviewSelectSchedule = new ReviewSelectScheduleDelegate();
-            List<AnnualSchedule> annualschedule = reviewSelectSchedule.getAllAnnual();
-            List<Integer> annuals = new ArrayList();
-            for(int i=0;i < annualschedule.size();i++){
-                annuals.add(annualschedule.get(i).getYear());
-            }
+            List<String> annuals = reviewSelectSchedule.getAllAnnual();
             hsr.setAttribute("annuals", annuals);
             return "/pages/selectannual.jsp";
-        } catch (NotFoundException ex) {
-            Logger.getLogger(EnterScheduleDetailsCmd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (NotFoundException | SQLException ex) {
             Logger.getLogger(EnterScheduleDetailsCmd.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";

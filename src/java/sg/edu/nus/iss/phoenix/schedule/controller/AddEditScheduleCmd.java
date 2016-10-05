@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sg.edu.nus.iss.phoenix.radioprogram.delegate.ProgramDelegate;
 import sg.edu.nus.iss.phoenix.user.delegate.ManageUserDelegate;
+import sg.edu.nus.iss.phoenix.util.DateUtil;
 
 /**
  *
@@ -27,19 +28,28 @@ public class AddEditScheduleCmd implements Perform {
     @Override
     public String perform(String string, HttpServletRequest hsr, HttpServletResponse hsr1) throws IOException, ServletException {
         try {
-            if(hsr.getSession().getAttribute("user") == null){
+            if (hsr.getSession().getAttribute("user") == null) {
                 return "/pages/login.jsp";
+            }
+            String dates = "";
+            if (hsr.getParameter("dates") == null) {
+                String[] strs = DateUtil.getDateInWeek(DateUtil.getWeekByDate(hsr.getParameter("dateOfProgram")), Integer.parseInt(hsr.getParameter("dateOfProgram").split("-")[0]));
+                for (String str : strs) {
+                    dates = dates + str + ";";
+                }
+                hsr.setAttribute("dates", dates);
             }
             ProgramDelegate programDelegate = new ProgramDelegate();
             ManageUserDelegate manageUserDelegate = new ManageUserDelegate();
             hsr.setAttribute("program", programDelegate.findAllRP());
             hsr.setAttribute("producer", manageUserDelegate.getAllProducer());
             hsr.setAttribute("presenter", manageUserDelegate.getAllPresenter());
+
             return "/pages/setupschedule.jsp";
         } catch (SQLException ex) {
             Logger.getLogger(AddEditScheduleCmd.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
-    
+
 }

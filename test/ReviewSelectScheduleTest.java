@@ -60,7 +60,7 @@ public class ReviewSelectScheduleTest {
     public void setUp() {
         this.reviewSelectScheduleService = new ReviewSelectScheduleService();
         this.programSlot = new ProgramSlot();
-        this.programSlot.setDateOfProgram(Timestamp.valueOf("2016-8-9 00:30:00"));
+        this.programSlot.setDateOfProgram("2016-8-9 00:30:00");
         this.programSlot.setDuration(Time.valueOf("00:30:00"));
         User presenter = new User();
         presenter.setId("presenter");
@@ -77,7 +77,7 @@ public class ReviewSelectScheduleTest {
         presenter.setRoles(roles1);
         this.programSlot.setProducer(producer);
         this.programSlot.setProgramName("ppk");
-        this.programSlot.setStartTime(Timestamp.valueOf("2016-8-9 00:30:00"));
+        this.programSlot.setStartTime(Time.valueOf("00:30:00"));
     }
     
     @After
@@ -96,17 +96,15 @@ public class ReviewSelectScheduleTest {
             ScheduleDAO scheudleDao = mock(ScheduleDAO.class);
             ReviewSelectScheduleService reviewSelectScheduleService = new ReviewSelectScheduleService(scheudleDao);
             WeeklySchedule weeklySchedule = mock(WeeklySchedule.class);
-            WeeklySchedule[] weeks = {weeklySchedule};
-            when(scheudleDao.getAllWeek(2016)).thenReturn(Arrays.asList(weeks));
+            String[] weeks = {"11"};
+            when(scheudleDao.getAllWeek("2016")).thenReturn(Arrays.asList(weeks));
         
         
-            List<WeeklySchedule> list = this.reviewSelectScheduleService.getAllWeek(2016);
+            List<String> list = this.reviewSelectScheduleService.getAllWeek("2016");
             Assert.assertTrue(list.size() != 0);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NotFoundException ex) {
-            Logger.getLogger(ManageScheduleServiceTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
     /**
@@ -118,10 +116,10 @@ public class ReviewSelectScheduleTest {
             ScheduleDAO scheudleDao = mock(ScheduleDAO.class);
             ReviewSelectScheduleService reviewSelectScheduleService = new ReviewSelectScheduleService(scheudleDao);
             AnnualSchedule annualSchedule = mock(AnnualSchedule.class);
-            AnnualSchedule[] annuals = {annualSchedule};
+            String[] annuals = {"2016"};
             when(scheudleDao.getAllAnnual()).thenReturn(Arrays.asList(annuals));
 
-            List<AnnualSchedule> list = reviewSelectScheduleService.getAllAnnual();
+            List<String> list = reviewSelectScheduleService.getAllAnnual();
             Assert.assertTrue(list.size() != 0);
             
         } catch (SQLException ex) {
