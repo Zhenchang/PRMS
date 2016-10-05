@@ -20,14 +20,13 @@
             <c:param name="producer" value=""/>
             <c:param name="insert" value="true"/>
         </c:url>
-        <a href="${url}"><fmt:message key="label.crudschedule.add"/></a>
         <br/><br/>
         <c:forEach var="week" items="${weeks}" varStatus="status">
 
             <c:url var="url" scope="page" value="/nocturne/manageschedule">
                 <c:param name="week" value="${week}"/>
             </c:url>
-            <a href="${url}">${week}</a> <br>
+            <a href="${url}">${week}</a><br>
             
         </c:forEach>
         

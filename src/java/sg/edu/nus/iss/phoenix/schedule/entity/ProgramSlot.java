@@ -6,7 +6,6 @@
 package sg.edu.nus.iss.phoenix.schedule.entity;
 
 import java.sql.Time;
-import java.sql.Timestamp;
 import sg.edu.nus.iss.phoenix.authenticate.entity.User;
 
 /**
@@ -17,15 +16,24 @@ public class ProgramSlot {
     private User presenter;
     private User producer;
     private Time duration;
-    private Timestamp dateOfProgram;
-    private Timestamp startTime;
+    private String dateOfProgram;
+    private Time startTime;
+    private String startDate;
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
     private String programName;
     
     public ProgramSlot(){
         
     }
 
-    public ProgramSlot(Time duration, Timestamp dateOfProgram) {
+    public ProgramSlot(Time duration, String dateOfProgram) {
         this.duration = duration;
         this.dateOfProgram = dateOfProgram;
     }
@@ -42,12 +50,12 @@ public class ProgramSlot {
         return duration;
     }
 
-    public Timestamp getDateOfProgram() {
+    public String getDateOfProgram() {
         return dateOfProgram;
     }
 
 
-    public Timestamp getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
@@ -67,7 +75,7 @@ public class ProgramSlot {
         this.duration = duration;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
@@ -75,7 +83,7 @@ public class ProgramSlot {
         this.programName = programName;
     }
 
-    public void setDateOfProgram(Timestamp dateOfProgram) {
+    public void setDateOfProgram(String dateOfProgram) {
         this.dateOfProgram = dateOfProgram;
     }
     

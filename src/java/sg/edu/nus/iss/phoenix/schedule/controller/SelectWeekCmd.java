@@ -32,8 +32,8 @@ public class SelectWeekCmd implements Perform{
     public String perform(String string, HttpServletRequest hsr, HttpServletResponse hsr1) throws IOException, ServletException {
         try {
             ReviewSelectScheduleDelegate reviewSelectSchedule = new ReviewSelectScheduleDelegate();
-            int year = Integer.parseInt(hsr.getParameter("year"));
-            List<Timestamp> weeks = reviewSelectSchedule.getAllWeek(year);
+            String year = hsr.getParameter("year");
+            List<String> weeks = reviewSelectSchedule.getAllWeek(year);
             hsr.setAttribute("weeks", weeks);
             return "/pages/selectweek.jsp";
         } catch (SQLException ex) {

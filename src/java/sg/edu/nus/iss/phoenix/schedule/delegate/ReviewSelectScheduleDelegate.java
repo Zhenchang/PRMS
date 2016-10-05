@@ -30,7 +30,7 @@ public class ReviewSelectScheduleDelegate {
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<Timestamp> getAllWeek(int year) throws NotFoundException, SQLException{
+    public List<String> getAllWeek(String year) throws NotFoundException, SQLException{
         return this.reviewSelectScheduleService.getAllWeek(year);
     }
     
@@ -40,7 +40,7 @@ public class ReviewSelectScheduleDelegate {
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public List<Integer> getAllAnnual() throws NotFoundException, SQLException{
+    public List<String> getAllAnnual() throws NotFoundException, SQLException{
         return this.reviewSelectScheduleService.getAllAnnual();
     }
     

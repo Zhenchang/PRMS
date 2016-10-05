@@ -32,7 +32,7 @@ public class SelectAnnualCmd implements Perform{
     public String perform(String string, HttpServletRequest hsr, HttpServletResponse hsr1) throws IOException, ServletException {
         try {
             ReviewSelectScheduleDelegate reviewSelectSchedule = new ReviewSelectScheduleDelegate();
-            List<Integer> annuals = reviewSelectSchedule.getAllAnnual();
+            List<String> annuals = reviewSelectSchedule.getAllAnnual();
             hsr.setAttribute("annuals", annuals);
             return "/pages/selectannual.jsp";
         } catch (SQLException ex) {

@@ -8,6 +8,7 @@ package sg.edu.nus.iss.phoenix.schedule.delegate;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import sg.edu.nus.iss.phoenix.core.dao.DAOFactoryImpl;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
@@ -35,6 +36,10 @@ public class ManageScheduleDelegate {
     public List<ProgramSlot> getAllProgramSlots() throws SQLException, NotFoundException{
         return this.manageScheduleService.getAllProgramSlots();
     }
+    
+    public void copyWeeklySchedule(String originWeek, String dateInTargetWeek) throws SQLException, NotFoundException {
+        manageScheduleService.processCopyWeeklySchedule(originWeek, dateInTargetWeek);
+    }
     /**
      * return all program slots in a specific week
      * @param week
@@ -42,7 +47,7 @@ public class ManageScheduleDelegate {
      * @throws SQLException
      * @throws NotFoundException 
      */
-    public List<ProgramSlot> getAllProgramSlots(Timestamp week) throws SQLException, NotFoundException{
+    public List<ProgramSlot> getAllProgramSlots(String week) throws SQLException, NotFoundException{
         return this.manageScheduleService.getAllProgramSlots(week);
     }
     
@@ -63,18 +68,18 @@ public class ManageScheduleDelegate {
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public void processModify(ProgramSlot programSlot, Time duration, Timestamp dateOfProgram) throws NotFoundException, SQLException{
+    public void processModify(ProgramSlot programSlot, Time duration, String dateOfProgram) throws NotFoundException, SQLException{
         this.manageScheduleService.processModify(programSlot, duration, dateOfProgram);
     }
     
     /**
      * delete the program slot 
-     * @param duration
+     * @param startTime
      * @param dateOfProgram
      * @throws NotFoundException
      * @throws SQLException 
      */
-    public void processDelete(Time duration, Timestamp dateOfProgram) throws NotFoundException, SQLException{
-        this.manageScheduleService.processDelete(duration, dateOfProgram);
+    public void processDelete(Time startTime, String dateOfProgram) throws NotFoundException, SQLException{
+        this.manageScheduleService.processDelete(startTime, dateOfProgram);
     }
 }

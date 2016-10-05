@@ -9,7 +9,6 @@ import at.nocturne.api.Action;
 import at.nocturne.api.Perform;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +30,7 @@ public class ManageScheduleCmd implements Perform {
     public String perform(String string, HttpServletRequest hsr, HttpServletResponse hsr1) throws IOException, ServletException {
         try {
             ManageScheduleDelegate manageScheduleDelegate = new ManageScheduleDelegate();
-            Timestamp week = Timestamp.valueOf(hsr.getParameter("week"));
+            String week = hsr.getParameter("week");
             List<ProgramSlot> programSolts = manageScheduleDelegate.getAllProgramSlots(week);
             hsr.setAttribute("programsolts", programSolts);
             return "/pages/crudschedule.jsp";

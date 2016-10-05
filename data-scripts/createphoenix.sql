@@ -1,176 +1,190 @@
-create database phoenix;
+CREATE DATABASE  IF NOT EXISTS `phoenix` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `phoenix`;
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
+--
+-- Host: localhost    Database: phoenix
+-- ------------------------------------------------------
+-- Server version	5.7.11
 
-use phoenix;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- -----------------------------------------------------
--- Table `phoenix`.`role`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `phoenix`.`role` ;
+--
+-- Table structure for table `annual-schedule`
+--
 
-CREATE  TABLE IF NOT EXISTS `phoenix`.`role` (
-  `role` VARCHAR(15) NOT NULL ,
-  `accessPrivilege` VARCHAR(45) NULL ,
-  PRIMARY KEY (`role`) )
-ENGINE = InnoDB;
+DROP TABLE IF EXISTS `annual-schedule`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `annual-schedule` (
+  `year` varchar(45) NOT NULL,
+  `assingedBy` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`year`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE UNIQUE INDEX `role_UNIQUE` ON `phoenix`.`role` (`role` ASC) ;
+--
+-- Dumping data for table `annual-schedule`
+--
 
+LOCK TABLES `annual-schedule` WRITE;
+/*!40000 ALTER TABLE `annual-schedule` DISABLE KEYS */;
+INSERT INTO `annual-schedule` VALUES ('2016','dogbert'),('2017','dogbert'),('2018','dogbert');
+/*!40000 ALTER TABLE `annual-schedule` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- -----------------------------------------------------
--- Table `phoenix`.`user`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `phoenix`.`user` ;
+--
+-- Table structure for table `program-slot`
+--
 
-CREATE  TABLE IF NOT EXISTS `phoenix`.`user` (
-  `id` VARCHAR(40) NOT NULL ,
-  `password` VARCHAR(45) NULL ,
-  `name` VARCHAR(45) NULL ,
-  `role` VARCHAR(255) NULL ,
-  PRIMARY KEY (`id`))
---  CONSTRAINT `role`
---    FOREIGN KEY (`role` )
---    REFERENCES `phoenix`.`role` (`role` )
---    ON DELETE NO ACTION
---    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+DROP TABLE IF EXISTS `program-slot`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `program-slot` (
+  `duration` time NOT NULL,
+  `dateOfProgram` date NOT NULL,
+  `startTime` time DEFAULT NULL,
+  `program-name` varchar(45) DEFAULT NULL,
+  `presenter` varchar(40) DEFAULT NULL,
+  `producer` varchar(40) DEFAULT NULL,
+  `startDate` date DEFAULT NULL,
+  PRIMARY KEY (`duration`,`dateOfProgram`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE UNIQUE INDEX `id_UNIQUE` ON `phoenix`.`user` (`id` ASC) ;
+--
+-- Dumping data for table `program-slot`
+--
 
-CREATE INDEX `role_index` ON `phoenix`.`user` (`role` ASC) ;
+LOCK TABLES `program-slot` WRITE;
+/*!40000 ALTER TABLE `program-slot` DISABLE KEYS */;
+INSERT INTO `program-slot` VALUES ('00:30:00','2016-10-01','00:30:00','charity','dilbert','dogbert','2016-09-30'),('00:30:00','2016-10-05','00:00:56','charity','dilbert','dogbert','2016-09-30'),('00:30:00','2016-10-06','00:00:55','news','dilbert','wally','2016-09-30'),('00:30:00','2016-11-05','00:30:00','charity','dilbert','dogbert','2016-11-04'),('00:30:00','2017-01-30','00:50:00','charity','dilbert','dogbert','2017-01-29'),('00:30:00','2018-01-10','00:44:30','charity','dilbert','dogbert','2018-01-08'),('00:30:00','2018-03-13','00:30:00','charity','dilbert','dogbert','2018-03-12'),('00:30:00','2018-03-17','00:00:56','charity','dilbert','dogbert','2018-03-12'),('00:30:00','2018-03-18','00:00:55','news','dilbert','wally','2018-03-12'),('00:30:00','2018-10-30','00:30:00','charity','dilbert','dogbert','2018-10-29'),('00:30:00','2018-11-03','00:00:56','charity','dilbert','dogbert','2018-10-29'),('00:30:00','2018-11-04','00:00:55','news','dilbert','wally','2018-10-29');
+/*!40000 ALTER TABLE `program-slot` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- -----------------------------------------------------
--- Insert Data For Table `phoenix`.`role`
--- -----------------------------------------------------
+--
+-- Table structure for table `radio-program`
+--
 
--- role, access privilege
-insert into `phoenix`.`role` values("presenter","radio program presenter");
-insert into `phoenix`.`role` values("manager", "station manager");
-insert into `phoenix`.`role` values("admin", "system administrator");
-insert into `phoenix`.`role` values("producer", "program producer");
+DROP TABLE IF EXISTS `radio-program`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `radio-program` (
+  `name` varchar(45) NOT NULL,
+  `desc` varchar(100) DEFAULT NULL,
+  `typicalDuration` time DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `radio-program`
+--
 
--- -----------------------------------------------------
--- Insert Data For Table `phoenix`.`user`
--- -----------------------------------------------------
+LOCK TABLES `radio-program` WRITE;
+/*!40000 ALTER TABLE `radio-program` DISABLE KEYS */;
+INSERT INTO `radio-program` VALUES ('charity','president charity show for unfortunate','00:30:00'),('dance floor','dance show','00:30:00'),('news','full news broadcasted four times a day','00:30:00'),('noose','black comedy show','00:30:00'),('opinions','discuss, debate or share opinions regarding a theme or subject','00:30:00'),('ppk','phu chu kang comedy show','00:30:00'),('short news','summarised 5 minutes broadcasted every 2 hours','00:05:00'),('top 10','countdown music play of top 10 songs of the week','01:00:00'),('your choice','audinece ask for music album song of thier choice','01:00:00');
+/*!40000 ALTER TABLE `radio-program` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- id, password, name, role
-insert into `phoenix`.`user` values("dilbert", "dilbert", "dilbert, the hero", "presenter:producer");
-insert into `phoenix`.`user` values("wally", "wally", "wally, the bludger", "producer");
-insert into `phoenix`.`user` values("pointyhead", "pointyhead", "pointyhead, the manager", "manager");
-insert into `phoenix`.`user` values("catbert", "catbert", "catbert, the hr", "admin:manager");
-insert into `phoenix`.`user` values("dogbert", "dogbert", "dogbert, the CEO", "producer:admin");
+--
+-- Table structure for table `role`
+--
 
--- -----------------------------------------------------
--- Table `phoenix`.`radio-program`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `phoenix`.`radio-program` ;
+DROP TABLE IF EXISTS `role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role` (
+  `role` varchar(15) NOT NULL,
+  `accessPrivilege` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`role`),
+  UNIQUE KEY `role_UNIQUE` (`role`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE IF NOT EXISTS `phoenix`.`radio-program` (
-  `name` VARCHAR(45) NOT NULL ,
-  `desc` VARCHAR(100) NULL ,
-  `typicalDuration` TIME NULL ,
-  PRIMARY KEY (`name`) )
-ENGINE = InnoDB;
+--
+-- Dumping data for table `role`
+--
 
-CREATE UNIQUE INDEX `name_UNIQUE` ON `phoenix`.`radio-program` (`name` ASC) ;
+LOCK TABLES `role` WRITE;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES ('admin','system administrator'),('manager','station manager'),('presenter','radio program presenter'),('producer','program producer');
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+UNLOCK TABLES;
 
+--
+-- Table structure for table `user`
+--
 
--- -----------------------------------------------------
--- Insert Data For Table `phoenix`.`radio-program`
--- -----------------------------------------------------
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` varchar(40) NOT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `role_index` (`role`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-insert into `phoenix`.`radio-program` values("short news", "summarised 5 minutes broadcasted every 2 hours", '00:05:00');
-insert into `phoenix`.`radio-program` values("news", "full news broadcasted four times a day", '00:30:00');
-insert into `phoenix`.`radio-program` values("top 10", "countdown music play of top 10 songs of the week", '01:00:00');
-insert into `phoenix`.`radio-program` values("your choice", "audinece ask for music album song of thier choice", '01:00:00');
-insert into `phoenix`.`radio-program` values("opinions", "discuss, debate or share opinions regarding a theme or subject", '00:30:00');
-insert into `phoenix`.`radio-program` values("noose", "black comedy show", '00:30:00');
-insert into `phoenix`.`radio-program` values("ppk", "phu chu kang comedy show", '00:30:00');
-insert into `phoenix`.`radio-program` values("dance floor", "dance show", '00:30:00');
-insert into `phoenix`.`radio-program` values("charity", "president charity show for unfortunate", '00:30:00');
+--
+-- Dumping data for table `user`
+--
 
--- -----------------------------------------------------
--- Table `phoenix`.`annual-schedule`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `phoenix`.`annual-schedule` ;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('catbert','catbert','catbert, the hr','admin:manager'),('dilbert','dilbert','dilbert, the hero','presenter:producer'),('dogbert','dogbert','dogbert, the CEO','producer:admin'),('pointyhead','pointyhead','pointyhead, the manager','manager'),('wally','wally','wally, the bludger','producer');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE  TABLE IF NOT EXISTS `phoenix`.`annual-schedule` (
-  `year` INT NOT NULL ,
-  `assingedBy` VARCHAR(45) NULL ,
-  PRIMARY KEY (`year`) ,
-  CONSTRAINT `id_as`
-    FOREIGN KEY (`assingedBy` )
-    REFERENCES `phoenix`.`user` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Table structure for table `weekly-schedule`
+--
 
+DROP TABLE IF EXISTS `weekly-schedule`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weekly-schedule` (
+  `startDate` date NOT NULL,
+  `assignedBy` varchar(45) DEFAULT NULL,
+  `year` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`startDate`),
+  UNIQUE KEY `startDate_UNIQUE` (`startDate`),
+  KEY `id_assigned_by` (`assignedBy`),
+  KEY `id_year` (`year`),
+  CONSTRAINT `id_ws` FOREIGN KEY (`assignedBy`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE INDEX `id_annual_schedule` ON `phoenix`.`annual-schedule` (`assingedBy` ASC) ;
+--
+-- Dumping data for table `weekly-schedule`
+--
 
--- -----------------------------------------------------
--- Table `phoenix`.`program-slot`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `phoenix`.`program-slot` ;
+LOCK TABLES `weekly-schedule` WRITE;
+/*!40000 ALTER TABLE `weekly-schedule` DISABLE KEYS */;
+INSERT INTO `weekly-schedule` VALUES ('2016-09-30','dogbert','2016'),('2016-11-04','dogbert','2016'),('2017-01-29','dogbert','2017'),('2017-02-26','dogbert','2017'),('2018-01-08','dogbert','2018'),('2018-03-12','dogbert','2018'),('2018-10-29','dogbert','2018');
+/*!40000 ALTER TABLE `weekly-schedule` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-CREATE  TABLE IF NOT EXISTS `phoenix`.`program-slot` (
-  `duration` TIME NOT NULL ,
-  `dateOfProgram` DATETIME NOT NULL ,
-  `startTime` DATETIME NULL ,
-  `program-name` VARCHAR(45) NULL ,
-  PRIMARY KEY (`duration`, `dateOfProgram`) ,
-  CONSTRAINT `name`
-    FOREIGN KEY (`program-name` )
-    REFERENCES `phoenix`.`radio-program` (`name` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-CREATE INDEX `name_program_slot` ON `phoenix`.`program-slot` (`program-name` ASC) ;
-
-CREATE UNIQUE INDEX `dateOfProgram_UNIQUE` ON `phoenix`.`program-slot` (`dateOfProgram` ASC) ;
-
-
--- -----------------------------------------------------
--- Table `phoenix`.`weekly-schedule`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `phoenix`.`weekly-schedule` ;
-CREATE  TABLE IF NOT EXISTS `phoenix`.`weekly-schedule` (
-  `startDate` DATETIME NOT NULL ,
-  `assignedBy` VARCHAR(45) NULL ,
-  PRIMARY KEY (`startDate`) ,
-  CONSTRAINT `id_ws`
-    FOREIGN KEY (`assignedBy` )
-    REFERENCES `phoenix`.`user` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE UNIQUE INDEX `startDate_UNIQUE` ON `phoenix`.`weekly-schedule` (`startDate` ASC) ;
-
-CREATE INDEX `id_assigned_by` ON `phoenix`.`weekly-schedule` (`assignedBy` ASC) ;
-
-
--- Adding column
-ALTER TABLE `program-slot` ADD presenter VARCHAR(40);
-ALTER TABLE `program-slot` ADD producer VARCHAR(40);
-ALTER TABLE `program-slot` ADD startDate DATETIME;
-ALTER TABLE `weekly-schedule` ADD `year` INT;
-
-ALTER TABLE `program-slot` ADD CONSTRAINT `id_week` FOREIGN KEY (`startDate` ) REFERENCES `phoenix`.`weekly-schedule` (`startDate` ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE `program-slot` ADD CONSTRAINT `id_producer` FOREIGN KEY (`producer` ) REFERENCES `phoenix`.`user` (`id` ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE `program-slot` ADD CONSTRAINT `id_presenter` FOREIGN KEY (`presenter` ) REFERENCES `phoenix`.`user` (`id` ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE `weekly-schedule` ADD CONSTRAINT `id_year` FOREIGN KEY (`year` ) REFERENCES `phoenix`.`annual-schedule` (`year` ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-
-insert into `phoenix`.`annual-schedule` values(2016, "dilbert");
-insert into `phoenix`.`annual-schedule` values(2017, "pointyhead");
-
-
-insert into `phoenix`.`weekly-schedule` values("2016-09-26 00:30:00", "dilbert", 2016);
-insert into `phoenix`.`weekly-schedule` values("2016-09-27 00:30:00", "dilbert", 2016);
-insert into `phoenix`.`weekly-schedule` values("2017-09-26 00:30:00", "dilbert", 2017);
-
-insert into `phoenix`.`program-slot` values('00:30:00', '2016-09-27 00:30:00', '2016-09-27 00:30:00', 'ppk', 'dilbert', 'dogbert', '2016-09-27 00:30:00');
-insert into `phoenix`.`program-slot` values('00:40:00', '2016-09-27 00:40:00', '2016-09-27 00:30:00', 'ppk', 'dilbert', 'dogbert', '2016-09-27 00:30:00');
-insert into `phoenix`.`program-slot` values('00:50:00', '2016-09-27 00:50:00', '2016-09-27 00:30:00', 'ppk', 'dilbert', 'dogbert', '2016-09-27 00:30:00');
+-- Dump completed on 2016-10-05 15:13:34

@@ -8,6 +8,7 @@ package sg.edu.nus.iss.phoenix.schedule.dao;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
@@ -37,7 +38,7 @@ public interface ScheduleDAO {
      * @throws sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException 
      * @throws java.sql.SQLException 
 	 */
-	public abstract ProgramSlot getObject(Time duration, Timestamp dateOfProgram)
+	public abstract ProgramSlot getObject(Time duration, String dateOfProgram)
 			throws NotFoundException, SQLException;
 
 	/**
@@ -100,7 +101,7 @@ public interface ScheduleDAO {
      * @throws sg.edu.nus.iss.phoenix.core.exceptions.NotFoundException
      * @throws java.sql.SQLException
 	 */
-	public abstract void save(ProgramSlot valueObject, Time duration, Timestamp dateOfProgram)
+	public abstract void save(ProgramSlot valueObject, Time duration, String dateOfProgram)
 			throws NotFoundException, SQLException;
 
 	/**
@@ -163,8 +164,8 @@ public interface ScheduleDAO {
      * @return 
      * @throws java.sql.SQLException 
 	 */
-	public abstract ProgramSlot searchMatching(Time duration, Timestamp dateOfProgram)
+	public abstract ProgramSlot searchMatching(Time duration, String dateOfProgram)
 			throws SQLException;
         
-        public List<ProgramSlot> load(Timestamp week) throws NotFoundException, SQLException;
+        public List<ProgramSlot> load(String week) throws NotFoundException, SQLException;
 }
