@@ -10,6 +10,8 @@ import at.nocturne.api.Perform;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +48,11 @@ public class EnterUserDetailsCmd implements Perform {
         }
         user.setRoles(roles);
         if (req.getParameter("ins").equals("true")) {
-            userDlg.processCreate(user);
+            try {
+                userDlg.processCreate(user);
+            } catch (Exception ex) {
+               return "/pages/error.jsp";
+            }
         } else {
             userDlg.processModify(user);
         }

@@ -41,7 +41,7 @@
 				</tr>
 				<tr>
 					<td><fmt:message key="label.crudrp.duration" /></td>
-					<td><input type="text" name="typicalDuration"
+					<td><input type="text" step="1" name="typicalDuration"
                                                    value="${param['typicalDuration']}" size=15 maxlength=20> &nbsp;hh:mm:ss</td>
 				</tr>
 			</table>

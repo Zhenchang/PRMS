@@ -40,7 +40,7 @@ public class UserDelegate {
      * processCreate. This method will create a new user.
      * @param user User to be created. 
      */
-    public void processCreate(User user) {
+    public void processCreate(User user) throws Exception {
         service.createUser(user);
     }
 }

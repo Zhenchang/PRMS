@@ -35,13 +35,16 @@ public class UserService {
     /**
      * createUser. This method will create a new user.
      * @param user 
+     * @throws java.sql.SQLException 
      */
-    public void createUser(User user) {
+    public void createUser(User user) throws SQLException, Exception  {
+        boolean isDuplicate = false;
         try {
-            userDao.create(user);
-        } catch (SQLException ex) {
-            Logger.getLogger(ReviewSelectUserService.class.getName()).log(Level.SEVERE, null, ex);
+            isDuplicate = userDao.getObject(user.getId()) != null;
+        } catch (NotFoundException ex) {
         }
+        if(isDuplicate) throw new Exception("Duplicate Id!");
+        userDao.create(user);
     }
     
     /**
